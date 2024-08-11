@@ -4,6 +4,15 @@
  */
 package FrontEnd;
 
+import GestorTarjetasFE.Autorizacion;
+import GestorTarjetasFE.Cancelacion;
+import GestorTarjetasFE.Consultar;
+import GestorTarjetasFE.Movimiento;
+import GestorTarjetasFE.Solicitud;
+import java.awt.BorderLayout;
+import java.io.Console;
+import javax.swing.JPanel;
+
 /**
  *
  * @author debian
@@ -15,6 +24,16 @@ public class GestorTarjeta extends javax.swing.JPanel {
      */
     public GestorTarjeta() {
         initComponents();
+    }
+    
+    public void showPanel(JPanel p) {
+        p.setSize(980, 440);
+        p.setLocation(0, 0);
+        
+        contenidoGestorTarjeta.removeAll();
+        contenidoGestorTarjeta.add(p, BorderLayout.CENTER);
+        contenidoGestorTarjeta.revalidate();
+        contenidoGestorTarjeta.repaint();
     }
 
     /**
@@ -35,12 +54,32 @@ public class GestorTarjeta extends javax.swing.JPanel {
         contenidoGestorTarjeta = new javax.swing.JPanel();
 
         btnSolicitarTarjeta.setText("Solicitar Tarjeta");
+        btnSolicitarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolicitarTarjetaActionPerformed(evt);
+            }
+        });
 
         btnRegistrarMovimiento.setText("Registrar Movimiento");
+        btnRegistrarMovimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarMovimientoActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         btnAutorizarTarjeta.setText("Autorizar Tarjeta");
+        btnAutorizarTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizarTarjetaActionPerformed(evt);
+            }
+        });
 
         btnCancelarTarjeta.setText("Cancelar Tarjeta");
         btnCancelarTarjeta.addActionListener(new java.awt.event.ActionListener() {
@@ -65,22 +104,21 @@ public class GestorTarjeta extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(btnSolicitarTarjeta)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnRegistrarMovimiento)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnConsultar)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnAutorizarTarjeta)
-                        .addGap(57, 57, 57)
-                        .addComponent(btnCancelarTarjeta))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(contenidoGestorTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(btnSolicitarTarjeta)
+                .addGap(62, 62, 62)
+                .addComponent(btnRegistrarMovimiento)
+                .addGap(58, 58, 58)
+                .addComponent(btnConsultar)
+                .addGap(54, 54, 54)
+                .addComponent(btnAutorizarTarjeta)
+                .addGap(57, 57, 57)
+                .addComponent(btnCancelarTarjeta)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(contenidoGestorTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +130,9 @@ public class GestorTarjeta extends javax.swing.JPanel {
                     .addComponent(btnConsultar)
                     .addComponent(btnAutorizarTarjeta)
                     .addComponent(btnCancelarTarjeta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(contenidoGestorTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -111,7 +149,33 @@ public class GestorTarjeta extends javax.swing.JPanel {
 
     private void btnCancelarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTarjetaActionPerformed
         // TODO add your handling code here:
+        Cancelacion cancelacion = new Cancelacion();
+        showPanel(cancelacion);
     }//GEN-LAST:event_btnCancelarTarjetaActionPerformed
+
+    private void btnSolicitarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarTarjetaActionPerformed
+        // TODO add your handling code here:
+        Solicitud solicitud = new Solicitud();
+        showPanel(solicitud);
+    }//GEN-LAST:event_btnSolicitarTarjetaActionPerformed
+
+    private void btnRegistrarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMovimientoActionPerformed
+        // TODO add your handling code here:
+        Movimiento movimiento = new Movimiento();
+        showPanel(movimiento);
+    }//GEN-LAST:event_btnRegistrarMovimientoActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+        Consultar consultar = new Consultar();
+        showPanel(consultar);
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnAutorizarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarTarjetaActionPerformed
+        // TODO add your handling code here:
+        Autorizacion autorizacion = new Autorizacion();
+        showPanel(autorizacion);
+    }//GEN-LAST:event_btnAutorizarTarjetaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
