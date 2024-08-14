@@ -4,6 +4,7 @@
  */
 package FrontEnd;
 
+import SQL.SQL;
 import SQL.selectorDatosConexion;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -15,6 +16,7 @@ public class Pantalla extends javax.swing.JFrame {
         
         selectorDatosConexion selectorDatosConexion = new selectorDatosConexion();
         showPanel(selectorDatosConexion);
+        SQL sql = new SQL();
         
         
     }
