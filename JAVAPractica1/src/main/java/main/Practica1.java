@@ -2,7 +2,7 @@
 package main;
 
 import FrontEnd.Pantalla;
-import Permanencia.LectorPermanencia;
+import GestorArchivo.GestorArchivo;
 
 
 public class Practica1 {
@@ -13,9 +13,7 @@ public class Practica1 {
         panta.setVisible(true);
         panta.setLocationRelativeTo(null);
         
-        
-        
-        LectorPermanencia lector = new LectorPermanencia();
+        GestorArchivo lector = new GestorArchivo();
         
         
     }

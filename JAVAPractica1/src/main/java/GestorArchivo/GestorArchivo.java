@@ -1,10 +1,10 @@
-package Permanencia;
+package GestorArchivo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LectorPermanencia {
+public class GestorArchivo {
     
     //Abajo son arreglos en donde insgra la autorizacion dividida
 //    private String[] solicitud ;
@@ -13,13 +13,43 @@ public class LectorPermanencia {
 //    private String tarjetaAAutorizar;
 //    private String tarjetaACancelar;
     private String[][] totalProcesos = new String[5][];
+    private int velocidadProcesamiento;
+    private String path;
     
-    public LectorPermanencia() {
-
+    
+    public GestorArchivo() {
         limpiarProcesos();
         imprimirPruebaLinea();
         System.out.println("FIN");
     }
+    
+    
+    
+    
+    
+    
+    private void cargarArchivo(){
+        
+    }
+    
+    private void procesar() {
+        
+    }
+    
+    private void indicarProcesamiento() {
+        
+    }
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public void limpiarProcesos() {
         String linea;

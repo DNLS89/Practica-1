@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 
 public class SQL {
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/control_tarjetas";
     //Ahora especificamos el usuario y la contrase!na que usa MYSQL
     private static final String USER = "root";
     private static final String PASSWORD = "123";
@@ -16,37 +16,28 @@ public class SQL {
     //Ahora creamos un objeto que represente a la conexion
     private Connection connection;
     
+    public SQL() {
+        //Establecer la conexion
+        establecerConexion();
+    }
+    
     public void establecerConexion() {
         try {
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
-            
-            String insert = "create schema PRUEBA";
-            Statement statementInsert = connection.createStatement();
-            //Abajo lo de la derecha regresa la cantidad de rows modificadas al igual que en la terminal por si es que nos interesa
-            statementInsert.executeUpdate(insert);
             
         } catch (SQLException e) {
             System.out.println("Error PRUEBA al conectar a la DB");
             e.printStackTrace();
         }
     }
-
-    public SQL() {
-        
-        //Intentar crear un Schema
-        
-        //Crear la base de datos si es que no existe
-        
-        //Establecer la conexion
-        establecerConexion();
-        
-        
-    }
     
-    public boolean existeDB() {
-        return false;
-        //return true;
+    public void leer_EscribirDB(){
+        //Acá podría ser un get() de connection para ingresar los datos, quedaría mejor tener una instrucción por cada trámite
+        
     }
+
+    
+    
     
     
 }
