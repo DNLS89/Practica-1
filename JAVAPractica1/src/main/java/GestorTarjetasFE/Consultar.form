@@ -109,12 +109,16 @@
         <Component class="javax.swing.JTextField" name="txtNumeroTarjeta">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumeroTarjetaActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroTarjetaKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnProcesarSolicitud">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultar y Generar HTML"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcesarSolicitudActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

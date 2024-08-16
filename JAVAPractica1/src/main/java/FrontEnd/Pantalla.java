@@ -11,7 +11,10 @@ import javax.swing.JPanel;
 
 public class Pantalla extends javax.swing.JFrame {
 
-    public Pantalla() {
+    private SQL sql;
+    
+    public Pantalla(SQL sql) {
+        this.sql = sql;
         initComponents();
         
     }
@@ -125,7 +128,7 @@ public class Pantalla extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        GestorTarjeta prueba = new GestorTarjeta();
+        GestorTarjeta prueba = new GestorTarjeta(sql);
         showPanel(prueba);
     }//GEN-LAST:event_jButton2ActionPerformed
 

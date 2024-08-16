@@ -41,8 +41,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
                           <Component id="txtNumeroSolicitud" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="290" max="32767" attributes="0"/>
-                          <Component id="txtFechaSolicitud" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="txtNoSolicitud" min="-2" pref="142" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -50,7 +51,22 @@
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="284" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="263" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="445" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
+                          <Component id="btnProcesarSolicitud" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                          <Component id="txtFechaSolicitud" min="-2" pref="266" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="78" max="32767" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
@@ -62,23 +78,10 @@
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jComboBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="selectorTipo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSalario" alignment="0" pref="340" max="32767" attributes="0"/>
                       <Component id="txtNombreSolicitante" alignment="0" max="32767" attributes="0"/>
                       <Component id="txtDireccion" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="445" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="404" max="-2" attributes="0"/>
-                          <Component id="btnProcesarSolicitud" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -89,12 +92,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtNumeroSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFechaSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNoSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -105,7 +108,7 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="selectorTipo" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -123,7 +126,10 @@
                       <Component id="txtDireccion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="45" max="32767" attributes="0"/>
-                  <Component id="btnProcesarSolicitud" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnProcesarSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFechaSolicitud" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -142,7 +148,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="txtFechaSolicitud">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha: "/>
+            <Property name="text" type="java.lang.String" value="  "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -173,6 +179,9 @@
         <Component class="javax.swing.JTextField" name="txtNombreSolicitante">
         </Component>
         <Component class="javax.swing.JTextField" name="txtSalario">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSalarioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDireccion">
         </Component>
@@ -180,21 +189,28 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Procesar Solicitud"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcesarSolicitudActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="selectorTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="--"/>
-                <StringItem index="1" value="Nacional"/>
-                <StringItem index="2" value="Regional"/>
-                <StringItem index="3" value="Internacional"/>
+              <StringArray count="3">
+                <StringItem index="0" value="Nacional"/>
+                <StringItem index="1" value="Regional"/>
+                <StringItem index="2" value="Internacional"/>
               </StringArray>
             </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNoSolicitud">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNoSolicitudActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

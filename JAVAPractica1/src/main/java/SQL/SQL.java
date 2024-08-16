@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 
 public class SQL {
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/control_tarjetas";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/CONTROL_TARJETAS";
     //Ahora especificamos el usuario y la contrase!na que usa MYSQL
     private static final String USER = "root";
     private static final String PASSWORD = "123";
@@ -36,8 +36,9 @@ public class SQL {
         
     }
 
-    
-    
+    public Connection getConnection() {
+        return connection;
+    }
     
     
 }

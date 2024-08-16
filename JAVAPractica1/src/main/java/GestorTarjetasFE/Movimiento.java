@@ -4,16 +4,21 @@
  */
 package GestorTarjetasFE;
 
+import SQL.SQL;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author debian
  */
 public class Movimiento extends javax.swing.JPanel {
 
+    private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Movimiento() {
+    public Movimiento(SQL sql) {
+        this.sql = sql;
         initComponents();
     }
 
@@ -47,7 +52,7 @@ public class Movimiento extends javax.swing.JPanel {
 
         jLabel5.setText("INGRESAR MOVIMIENTO");
 
-        labelFecha.setText("Fecha del mov: ");
+        labelFecha.setText("Fecha del mov (dd/mm/aaaa): ");
 
         jLabel1.setText("Para registrar el movimiento ingrese los siguientes datos:");
 
@@ -61,10 +66,14 @@ public class Movimiento extends javax.swing.JPanel {
 
         jLabel2.setText("Monto:");
 
-        txtFechaMov.setText("dd/mm/aaaa");
         txtFechaMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaMovActionPerformed(evt);
+            }
+        });
+        txtFechaMov.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaMovKeyTyped(evt);
             }
         });
 
@@ -74,48 +83,75 @@ public class Movimiento extends javax.swing.JPanel {
             }
         });
 
+        txtDescripcionMov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionMovActionPerformed(evt);
+            }
+        });
+
+        txtEstablecimientoMov.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEstablecimientoMovActionPerformed(evt);
+            }
+        });
+
         txtMonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMontoActionPerformed(evt);
             }
         });
+        txtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMontoKeyTyped(evt);
+            }
+        });
 
         btnProcesarSolicitud.setText("Registrar Movimiento");
+        btnProcesarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcesarSolicitudActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(474, 474, 474)
-                .addComponent(btnProcesarSolicitud)
-                .addGap(0, 339, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(445, 445, 445)
                 .addComponent(jLabel5)
-                .addGap(80, 366, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(329, 329, 329))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(163, 163, 163)
+                .addGap(181, 181, 181)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
+                    .addComponent(labelFecha)
                     .addComponent(jLabel6)
+                    .addComponent(jLabel8)
                     .addComponent(jLabel2)
-                    .addComponent(labelFecha))
-                .addGap(175, 175, 175)
+                    .addComponent(jLabel7))
+                .addGap(157, 157, 157)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTipoMovimiento)
-                    .addComponent(txtDescripcionMov)
-                    .addComponent(txtNumeroTarjeta)
-                    .addComponent(txtEstablecimientoMov)
-                    .addComponent(txtMonto)
-                    .addComponent(txtFechaMov))
-                .addGap(156, 156, 156))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtDescripcionMov, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(60, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTipoMovimiento)
+                            .addComponent(txtNumeroTarjeta)
+                            .addComponent(txtEstablecimientoMov)
+                            .addComponent(txtMonto)
+                            .addComponent(txtFechaMov))
+                        .addGap(156, 156, 156))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(329, 329, 329))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnProcesarSolicitud)
+                        .addGap(398, 398, 398))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,41 +160,33 @@ public class Movimiento extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFechaMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelFecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelFecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtFechaMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(36, 36, 36))
-                                            .addComponent(txtTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(36, 36, 36))
-                                    .addComponent(txtDescripcionMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36))
-                            .addComponent(txtEstablecimientoMov, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
+                    .addComponent(jLabel4)
+                    .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEstablecimientoMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtDescripcionMov, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(btnProcesarSolicitud)
-                .addGap(63, 63, 63))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -169,7 +197,7 @@ public class Movimiento extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,6 +212,45 @@ public class Movimiento extends javax.swing.JPanel {
     private void txtFechaMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaMovActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFechaMovActionPerformed
+
+    public boolean camposLlenadosCorrectamente() {
+        if (txtFechaMov.getText().isBlank() || txtNumeroTarjeta.getText().isBlank() || txtTipoMovimiento.getText().isBlank()
+                || txtDescripcionMov.getText().isBlank() || txtEstablecimientoMov.getText().isBlank() || txtMonto.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llena el apartado para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void btnProcesarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarSolicitudActionPerformed
+        // TODO add your handling code here:
+        if (camposLlenadosCorrectamente()) {
+            
+        }
+    }//GEN-LAST:event_btnProcesarSolicitudActionPerformed
+
+    private void txtFechaMovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaMovKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtFechaMovKeyTyped
+
+    private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMontoKeyTyped
+
+    private void txtDescripcionMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionMovActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionMovActionPerformed
+
+    private void txtEstablecimientoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstablecimientoMovActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEstablecimientoMovActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ import GestorTarjetasFE.Cancelacion;
 import GestorTarjetasFE.Consultar;
 import GestorTarjetasFE.Movimiento;
 import GestorTarjetasFE.Solicitud;
+import SQL.SQL;
 import java.awt.BorderLayout;
 import java.io.Console;
 import javax.swing.JPanel;
@@ -19,10 +20,12 @@ import javax.swing.JPanel;
  */
 public class GestorTarjeta extends javax.swing.JPanel {
 
+    private SQL sql;
     /**
      * Creates new form PruebaELIMINAR
      */
-    public GestorTarjeta() {
+    public GestorTarjeta(SQL sql) {
+        this.sql = sql;
         initComponents();
     }
     
@@ -149,31 +152,31 @@ public class GestorTarjeta extends javax.swing.JPanel {
 
     private void btnCancelarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTarjetaActionPerformed
         // TODO add your handling code here:
-        Cancelacion cancelacion = new Cancelacion();
+        Cancelacion cancelacion = new Cancelacion(sql);
         showPanel(cancelacion);
     }//GEN-LAST:event_btnCancelarTarjetaActionPerformed
 
     private void btnSolicitarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarTarjetaActionPerformed
         // TODO add your handling code here:
-        Solicitud solicitud = new Solicitud();
+        Solicitud solicitud = new Solicitud(sql);
         showPanel(solicitud);
     }//GEN-LAST:event_btnSolicitarTarjetaActionPerformed
 
     private void btnRegistrarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMovimientoActionPerformed
         // TODO add your handling code here:
-        Movimiento movimiento = new Movimiento();
+        Movimiento movimiento = new Movimiento(sql);
         showPanel(movimiento);
     }//GEN-LAST:event_btnRegistrarMovimientoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
-        Consultar consultar = new Consultar();
+        Consultar consultar = new Consultar(sql);
         showPanel(consultar);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAutorizarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarTarjetaActionPerformed
         // TODO add your handling code here:
-        Autorizacion autorizacion = new Autorizacion();
+        Autorizacion autorizacion = new Autorizacion(sql);
         showPanel(autorizacion);
     }//GEN-LAST:event_btnAutorizarTarjetaActionPerformed
 

@@ -117,12 +117,16 @@
         <Component class="javax.swing.JTextField" name="txtNumeroSolicitud">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumeroSolicitudActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNumeroSolicitudKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAutorizar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Procesar Autorizaci&#xf3;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAutorizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

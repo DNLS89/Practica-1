@@ -4,16 +4,21 @@
  */
 package GestorTarjetasFE;
 
+import SQL.SQL;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author debian
  */
 public class Cancelacion extends javax.swing.JPanel {
 
+    private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Cancelacion() {
+    public Cancelacion(SQL sql) {
+        this.sql = sql;
         initComponents();
     }
 
@@ -30,7 +35,7 @@ public class Cancelacion extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtNumeroSolicitud = new javax.swing.JTextField();
+        txtNumeroTarjeta = new javax.swing.JTextField();
         btnAutorizar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(980, 440));
@@ -43,13 +48,23 @@ public class Cancelacion extends javax.swing.JPanel {
 
         jLabel4.setText("Número de Tarjeta:");
 
-        txtNumeroSolicitud.addActionListener(new java.awt.event.ActionListener() {
+        txtNumeroTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroSolicitudActionPerformed(evt);
+                txtNumeroTarjetaActionPerformed(evt);
+            }
+        });
+        txtNumeroTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroTarjetaKeyTyped(evt);
             }
         });
 
         btnAutorizar.setText("Cancelar Tarjeta");
+        btnAutorizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,7 +78,7 @@ public class Cancelacion extends javax.swing.JPanel {
                 .addGap(273, 273, 273)
                 .addComponent(jLabel4)
                 .addGap(98, 98, 98)
-                .addComponent(txtNumeroSolicitud)
+                .addComponent(txtNumeroTarjeta)
                 .addGap(179, 179, 179))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +100,8 @@ public class Cancelacion extends javax.swing.JPanel {
                 .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtNumeroSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                    .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addComponent(btnAutorizar)
                 .addGap(39, 39, 39))
         );
@@ -105,9 +120,34 @@ public class Cancelacion extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNumeroSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSolicitudActionPerformed
+    private void txtNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroSolicitudActionPerformed
+    }//GEN-LAST:event_txtNumeroTarjetaActionPerformed
+
+    public boolean camposLlenadosCorrectamente() {
+        if (txtNumeroTarjeta.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llena el apartado para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
+        // TODO add your handling code here:
+        if (camposLlenadosCorrectamente()) {
+            
+        }
+    }//GEN-LAST:event_btnAutorizarActionPerformed
+
+    private void txtNumeroTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroTarjetaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -116,6 +156,6 @@ public class Cancelacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtNumeroSolicitud;
+    private javax.swing.JTextField txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
 }

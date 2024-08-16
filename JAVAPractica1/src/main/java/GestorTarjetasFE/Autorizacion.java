@@ -4,16 +4,21 @@
  */
 package GestorTarjetasFE;
 
+import SQL.SQL;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author debian
  */
 public class Autorizacion extends javax.swing.JPanel {
 
+    private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Autorizacion() {
+    public Autorizacion(SQL sql) {
+        this.sql = sql;
         initComponents();
     }
 
@@ -50,8 +55,18 @@ public class Autorizacion extends javax.swing.JPanel {
                 txtNumeroSolicitudActionPerformed(evt);
             }
         });
+        txtNumeroSolicitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroSolicitudKeyTyped(evt);
+            }
+        });
 
         btnAutorizar.setText("Procesar Autorización");
+        btnAutorizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutorizarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("*Requisitos: salario mayor al 60% del crédito solicitado");
 
@@ -121,6 +136,31 @@ public class Autorizacion extends javax.swing.JPanel {
     private void txtNumeroSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSolicitudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroSolicitudActionPerformed
+
+    public boolean camposLlenadosCorrectamente() {
+        if (txtNumeroSolicitud.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llena el apartado para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
+        // TODO add your handling code here:
+        if (camposLlenadosCorrectamente()) {
+            
+        }
+    }//GEN-LAST:event_btnAutorizarActionPerformed
+
+    private void txtNumeroSolicitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroSolicitudKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroSolicitudKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

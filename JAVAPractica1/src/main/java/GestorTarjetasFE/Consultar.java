@@ -4,16 +4,21 @@
  */
 package GestorTarjetasFE;
 
+import SQL.SQL;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author debian
  */
 public class Consultar extends javax.swing.JPanel {
 
+    private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Consultar() {
+    public Consultar(SQL sql) {
+        this.sql = sql;
         initComponents();
     }
 
@@ -48,8 +53,18 @@ public class Consultar extends javax.swing.JPanel {
                 txtNumeroTarjetaActionPerformed(evt);
             }
         });
+        txtNumeroTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroTarjetaKeyTyped(evt);
+            }
+        });
 
         btnProcesarSolicitud.setText("Consultar y Generar HTML");
+        btnProcesarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcesarSolicitudActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,6 +123,31 @@ public class Consultar extends javax.swing.JPanel {
     private void txtNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroTarjetaActionPerformed
+
+    public boolean camposLlenadosCorrectamente() {
+        if (txtNumeroTarjeta.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llena el apartado para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private void btnProcesarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarSolicitudActionPerformed
+        // TODO add your handling code here:
+        if (camposLlenadosCorrectamente()) {
+            
+        }
+    }//GEN-LAST:event_btnProcesarSolicitudActionPerformed
+
+    private void txtNumeroTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNumeroTarjetaKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

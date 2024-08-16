@@ -1,5 +1,6 @@
 package GestorArchivo;
 
+import SQL.SQL;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,9 +16,10 @@ public class GestorArchivo {
     private String[][] totalProcesos = new String[5][];
     private int velocidadProcesamiento;
     private String path;
-    
+    private SQL sql;
     
     public GestorArchivo() {
+        this.sql = sql;
         limpiarProcesos();
         imprimirPruebaLinea();
         System.out.println("FIN");
@@ -39,18 +41,13 @@ public class GestorArchivo {
     private void indicarProcesamiento() {
         
     }
+    
+    
+    
+    
+    
+    
         
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public void limpiarProcesos() {
         String linea;
         try {
