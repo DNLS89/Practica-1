@@ -40,7 +40,6 @@ public class Solicitud extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txtNumeroSolicitud = new javax.swing.JLabel();
         txtFechaSolicitud = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -52,13 +51,11 @@ public class Solicitud extends javax.swing.JPanel {
         txtDireccion = new javax.swing.JTextField();
         btnProcesarSolicitud = new javax.swing.JButton();
         selectorTipo = new javax.swing.JComboBox<>();
-        txtNoSolicitud = new javax.swing.JTextField();
+        txtNoSolicitud = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(980, 440));
 
         jLabel5.setText("SOLICITAR TARJETA");
-
-        txtNumeroSolicitud.setText("No. solicitud:");
 
         txtFechaSolicitud.setText("  ");
 
@@ -87,86 +84,84 @@ public class Solicitud extends javax.swing.JPanel {
 
         selectorTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nacional", "Regional", "Internacional" }));
 
-        txtNoSolicitud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoSolicitudActionPerformed(evt);
-            }
-        });
+        txtNoSolicitud.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(307, 307, 307))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(445, 445, 445)
-                        .addComponent(jLabel5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(404, 404, 404)
-                        .addComponent(btnProcesarSolicitud)))
-                .addContainerGap(391, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(selectorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-                    .addComponent(txtNombreSolicitante)
-                    .addComponent(txtDireccion))
+                .addGap(445, 445, 445)
+                .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(txtNumeroSolicitud)
-                .addGap(40, 40, 40)
-                .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtFechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(selectorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSalario)
+                            .addComponent(txtNombreSolicitante)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(85, 85, 85))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnProcesarSolicitud)
+                .addGap(50, 50, 50)
+                .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNumeroSolicitud)
-                    .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFechaSolicitud))
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(selectorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6))
-                                    .addComponent(txtNombreSolicitante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7))
-                            .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(txtFechaSolicitud))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1)))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8))
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(btnProcesarSolicitud)
-                .addGap(57, 57, 57))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(selectorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(36, 36, 36))
+                                        .addComponent(txtNombreSolicitante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(36, 36, 36))
+                                .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(36, 36, 36))
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnProcesarSolicitud)
+                    .addComponent(txtNoSolicitud))
+                .addGap(81, 81, 81))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -181,15 +176,12 @@ public class Solicitud extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNoSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoSolicitudActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNoSolicitudActionPerformed
-
     public boolean camposLlenadosCorrectamente() {
-        if (txtNombreSolicitante.getText().isBlank() || txtDireccion.getText().isBlank() || txtSalario.getText().isBlank()
-                || txtNoSolicitud.getText().isBlank()) {
+        if (txtNombreSolicitante.getText().isBlank() || txtDireccion.getText().isBlank() || txtSalario.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Llena todos los apartados para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
             return false;
+        } else {
+            JOptionPane.showMessageDialog(null, "Solicitud Procesada", "", JOptionPane.PLAIN_MESSAGE);
         }
         
         return true;
@@ -199,8 +191,8 @@ public class Solicitud extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         if (camposLlenadosCorrectamente()) {
-            SolicitudBE solicitudBE = new SolicitudBE(sql, txtNombreSolicitante.getText(), txtDireccion.getText(), Integer.valueOf(txtSalario.getText()),
-                    txtNoSolicitud.getText(), selectorTipo.getSelectedIndex());
+            SolicitudBE solicitudBE = new SolicitudBE(sql, txtNombreSolicitante.getText(), txtDireccion.getText(),
+                    Integer.valueOf(txtSalario.getText()), selectorTipo.getSelectedIndex(), txtNoSolicitud);
         }
         
     }//GEN-LAST:event_btnProcesarSolicitudActionPerformed
@@ -227,9 +219,8 @@ public class Solicitud extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> selectorTipo;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JLabel txtFechaSolicitud;
-    private javax.swing.JTextField txtNoSolicitud;
+    private javax.swing.JLabel txtNoSolicitud;
     private javax.swing.JTextField txtNombreSolicitante;
-    private javax.swing.JLabel txtNumeroSolicitud;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,26 +24,23 @@ public class SolicitudBE extends Tramite{
     private String numeroSolicitud;
 
     //TAREJTA
-    private String fechaCreacion;
     private ENUMTipoTarjeta tipo;
     private int limiteTarjeta;
     private String estado;
     private SQL sql;
+    private JLabel txtNoSolicitud;
     
-    public SolicitudBE(SQL sql, String nombreUsuario, String direccion, int salario, String numeroSolicitud, int tipo) {
+    public SolicitudBE(SQL sql, String nombreUsuario, String direccion, int salario, int tipo, JLabel txtNoSolicitud) {
         this.sql = sql;
         
         //DATOS USUARIO
         this.nombreUsuario = nombreUsuario;
         this.direccion = direccion;
         this.salario = salario;
-        this.numeroSolicitud = numeroSolicitud;
+        this.txtNoSolicitud = txtNoSolicitud;
         
         
         //DATOS TAREJTA
-        Date thisDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
-        this.fechaCreacion = dateFormat.format(thisDate);
         //1 Nacional, 2 Regional, 3 Internacional
         this.tipo = ENUMTipoTarjeta.values()[tipo];
         //Abajo que se escoja en base al tipo de arriba
@@ -62,21 +60,20 @@ public class SolicitudBE extends Tramite{
     public void procesarTramite() {
         this.sql.getConnection();
         //Meter datos del usuario
-        System.out.println("Datos usuario");
-        System.out.println("INSERT INTO usuario (nombre, direccion, salario) VALUES ('" + nombreUsuario
-                + "', '" + direccion + "','" + salario + "');");
         String comandoUsuario = "INSERT INTO usuario (nombre, direccion, salario) VALUES ('" + nombreUsuario
                 + "', '" + direccion + "','" + salario + "');";
         
-        
         //Meter datos a la tarjeta
-        System.out.println("Datos Tarjeta");
-        System.out.println("INSERT INTO tarjeta (tipo, limite, estado) VALUES ('" + tipo
-                + "', '" + limiteTarjeta + "','" + estado + "');");
         String comandoTarjeta = "INSERT INTO tarjeta (tipo, limite, estado) VALUES ('" + tipo
                 + "', '" + limiteTarjeta + "','" + estado + "');";
         
-        sql.escribirDatosSolicitudSQL(comandoUsuario, comandoTarjeta);
+        //Abajo muestra el último numero de solicitud
+        numeroSolicitud = sql.escribirDatosSolicitudSQL(comandoUsuario, comandoTarjeta);
+        if (!numeroSolicitud.equals("")) {
+            txtNoSolicitud.setText("Su número de solicitud es: " + numeroSolicitud);
+        }
+        
+        //
         
     }
 }

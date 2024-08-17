@@ -5,6 +5,7 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
+import Tramite.AutorizacionBE;
 import javax.swing.JOptionPane;
 
 /**
@@ -149,7 +150,7 @@ public class Autorizacion extends javax.swing.JPanel {
     private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
         // TODO add your handling code here:
         if (camposLlenadosCorrectamente()) {
-            
+            AutorizacionBE autorizacionBE = new AutorizacionBE(sql, Integer.valueOf(txtNumeroSolicitud.getText()));
         }
     }//GEN-LAST:event_btnAutorizarActionPerformed
 

@@ -3,6 +3,7 @@ package SQL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -31,6 +32,8 @@ public class SQL {
             System.out.println("Error PRUEBA al conectar a la DB");
             e.printStackTrace();
         }
+        
+        //Tratar ver si existe una base de datos, tal vez lo mejor es ver si existen datos
         try {
             Statement statementInsert = connection.createStatement();
             //Abajo lo de la derecha regresa la cantidad de rows modificadas al igual que en la terminal por si es que nos interesa
@@ -46,25 +49,38 @@ public class SQL {
         //Acá podría ser un get() de connection para ingresar los datos, quedaría mejor tener una instrucción por cada trámite
         
     }
-    
-    public void escribirDatosSolicitudSQL(String comandoUsuario, String comandoTarjeta) {
-        
+    //SOLICITUD
+    public String escribirDatosSolicitudSQL(String comandoUsuario, String comandoTarjeta) {
+        String numeroSolicitud = "";
         try {
             Statement statementInsert = connection.createStatement();
             //Abajo lo de la derecha regresa la cantidad de rows modificadas al igual que en la terminal por si es que nos interesa
             int rowsAffected = statementInsert.executeUpdate(comandoUsuario);
-            System.out.println("Rows affected " + rowsAffected);
             
             rowsAffected = statementInsert.executeUpdate(comandoTarjeta);
-            System.out.println("Rows affected " + rowsAffected);
-            //Abajo notar que solo se puede recolectar SQLException
+            
+            //Conseguir la última ID para que se muestre el último numero de solicitud
+            String numeroTarjeta = "select max(numero_solicitud) from tarjeta";
+            statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(numeroTarjeta);
+            if (resultSet.next()) {
+                numeroSolicitud = resultSet.getString("max(numero_solicitud)");
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
+        return numeroSolicitud;
+    }
+    
+    //AUTORIZACION
+    public void leerDatosAutorizacion () {
+        
         
     }
-
+    
+    
     public Connection getConnection() {
         return connection;
     }
