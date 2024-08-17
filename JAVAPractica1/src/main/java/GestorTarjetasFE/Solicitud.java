@@ -23,6 +23,10 @@ public class Solicitud extends javax.swing.JPanel {
     public Solicitud(SQL sql) {
         this.sql = sql;
         initComponents();
+        //Mostar fecha de última solicitud
+        Date thisDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
+        txtFechaSolicitud.setText("Fecha Solicitud: " + dateFormat.format(thisDate));
     }
 
     /**
@@ -94,18 +98,9 @@ public class Solicitud extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(txtNumeroSolicitud)
-                        .addGap(35, 35, 35)
-                        .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(44, 44, 44)))
-                .addGap(263, 263, 263))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(307, 307, 307))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -113,10 +108,8 @@ public class Solicitud extends javax.swing.JPanel {
                         .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(404, 404, 404)
-                        .addComponent(btnProcesarSolicitud)
-                        .addGap(83, 83, 83)
-                        .addComponent(txtFechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                        .addComponent(btnProcesarSolicitud)))
+                .addContainerGap(391, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,6 +124,14 @@ public class Solicitud extends javax.swing.JPanel {
                     .addComponent(txtNombreSolicitante)
                     .addComponent(txtDireccion))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(201, 201, 201)
+                .addComponent(txtNumeroSolicitud)
+                .addGap(40, 40, 40)
+                .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtFechaSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +141,8 @@ public class Solicitud extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumeroSolicitud)
-                    .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFechaSolicitud))
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40)
@@ -163,9 +165,7 @@ public class Solicitud extends javax.swing.JPanel {
                         .addComponent(jLabel8))
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnProcesarSolicitud)
-                    .addComponent(txtFechaSolicitud))
+                .addComponent(btnProcesarSolicitud)
                 .addGap(57, 57, 57))
         );
 
@@ -201,13 +201,6 @@ public class Solicitud extends javax.swing.JPanel {
         if (camposLlenadosCorrectamente()) {
             SolicitudBE solicitudBE = new SolicitudBE(sql, txtNombreSolicitante.getText(), txtDireccion.getText(), Integer.valueOf(txtSalario.getText()),
                     txtNoSolicitud.getText(), selectorTipo.getSelectedIndex());
-            
-            
-            //Mostar fecha de última solicitud
-            Date thisDate = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/y");
-            txtFechaSolicitud.setText("Fecha Ult. Solicitud: " + dateFormat.format(thisDate));
-            
         }
         
     }//GEN-LAST:event_btnProcesarSolicitudActionPerformed

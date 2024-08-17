@@ -28,8 +28,6 @@ public class GestorArchivo {
     
     
     
-    
-    
     private void cargarArchivo(){
         
     }
@@ -41,8 +39,6 @@ public class GestorArchivo {
     private void indicarProcesamiento() {
         
     }
-    
-    
     
     
     

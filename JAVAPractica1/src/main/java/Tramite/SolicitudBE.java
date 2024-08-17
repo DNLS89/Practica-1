@@ -62,9 +62,21 @@ public class SolicitudBE extends Tramite{
     public void procesarTramite() {
         this.sql.getConnection();
         //Meter datos del usuario
-        System.out.println("INSERT INTO usuario (nombre, direccion, salario, numero_solicitud) VALUES ('" + nombreUsuario
-                + "', '" + direccion + "','" + salario + "', '" + numeroSolicitud + "');");
+        System.out.println("Datos usuario");
+        System.out.println("INSERT INTO usuario (nombre, direccion, salario) VALUES ('" + nombreUsuario
+                + "', '" + direccion + "','" + salario + "');");
+        String comandoUsuario = "INSERT INTO usuario (nombre, direccion, salario) VALUES ('" + nombreUsuario
+                + "', '" + direccion + "','" + salario + "');";
+        
         
         //Meter datos a la tarjeta
+        System.out.println("Datos Tarjeta");
+        System.out.println("INSERT INTO tarjeta (tipo, limite, estado) VALUES ('" + tipo
+                + "', '" + limiteTarjeta + "','" + estado + "');");
+        String comandoTarjeta = "INSERT INTO tarjeta (tipo, limite, estado) VALUES ('" + tipo
+                + "', '" + limiteTarjeta + "','" + estado + "');";
+        
+        sql.escribirDatosSolicitudSQL(comandoUsuario, comandoTarjeta);
+        
     }
 }
