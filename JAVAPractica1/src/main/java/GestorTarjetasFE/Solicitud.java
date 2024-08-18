@@ -180,8 +180,6 @@ public class Solicitud extends javax.swing.JPanel {
         if (txtNombreSolicitante.getText().isBlank() || txtDireccion.getText().isBlank() || txtSalario.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Llena todos los apartados para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
             return false;
-        } else {
-            JOptionPane.showMessageDialog(null, "Solicitud Procesada", "", JOptionPane.PLAIN_MESSAGE);
         }
         
         return true;

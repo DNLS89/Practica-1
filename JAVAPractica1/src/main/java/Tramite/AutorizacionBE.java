@@ -45,7 +45,7 @@ public class AutorizacionBE extends Tramite {
             cambiarEstado();
             cambiarNumeroTarjeta(tipoTarjeta());
             try {
-                cambiarFecha();
+                agregarFechaCreacion();
             } catch (ParseException ex) {
                 Logger.getLogger(AutorizacionBE.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -55,7 +55,66 @@ public class AutorizacionBE extends Tramite {
         }
     }
     
-    public void cambiarFecha() throws ParseException {
+        public boolean comprobarCumpleRequisitos() {
+        String selectUsuario = "SELECT * FROM usuario WHERE id_usuario like " + numeroSolicitud + "";
+        String selectTarjeta = "SELECT * FROM tarjeta WHERE numero_solicitud like " + numeroSolicitud + "";
+        double salarioNecesarioUsuario = 0;
+        String estadoTarjeta = "";
+        int limiteTarjeta = 0;
+        //4 comprobaciones:
+        //Que exista el numero de solicitud
+        //Salario mayor a 60%
+        //No esté autorizada
+        //No esté cancelada
+        
+        try {
+            //Ingresa a cliente para verificar de que el valor de solicitud es válido
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(selectUsuario);
+            //Existe el número de solicitud
+            if (!resultSet.next()) {
+                mensaje = "Número de solicitud inválido, no existente o erróneo";
+                return false;
+            }
+            
+            //Extrae el Salario
+            resultSet = statementInsert.executeQuery(selectUsuario);
+            while (resultSet.next()) {
+                salarioNecesarioUsuario = (resultSet.getInt("salario")* 0.6);
+            }
+            
+            //Ingresa a tarjeta y extrae los datos
+            resultSet = statementInsert.executeQuery(selectTarjeta);
+            while (resultSet.next()) {
+                estadoTarjeta = resultSet.getString("estado");
+                limiteTarjeta = resultSet.getInt("limite");
+            }
+            //Comprueba SALARIO MAYOR A 60%
+            if (!(salarioNecesarioUsuario >= limiteTarjeta)) {
+                mensaje = "Tú perfil no cumple con los requisitos para ser otorgada una tarjeta";
+                return false;
+            }
+
+            //La tarjeta no esté autorizada/cancelada/
+            if (estadoTarjeta.equals("ACTIVA")) {
+                mensaje = "Esta tarjeta ya ha sido autorizada";
+                return false;
+            } else if (estadoTarjeta.equals("CANCELADA")) {
+                mensaje = "Esta tarjeta está cancelada, no puede reactivarse";
+                return false;
+            } else if (!estadoTarjeta.equals("TRAMITE")) {
+                return false;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Error al consultar a la DB al autorizar");
+            e.printStackTrace();
+        }
+        
+        return true;
+    }
+    
+    public void agregarFechaCreacion() throws ParseException {
         Date thisDate = new Date();
         java.sql.Date sqlDate = new java.sql.Date (thisDate.getTime()); 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -68,7 +127,6 @@ public class AutorizacionBE extends Tramite {
                             + " WHERE numero_solicitud = " + "\"" + numeroSolicitud + "\"" + " ";
             Statement statementInsert = connection.createStatement();
             statementInsert.executeUpdate(comandoIngresarFechaCreacion);
-            System.out.println("Fehca 1");
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,7 +184,7 @@ public class AutorizacionBE extends Tramite {
     
     public void cambiarEstado(){
         try {
-            String cambioEstadoTarjeta = "UPDATE tarjeta set estado = \"AUTORIZADA\" where numero_solicitud = " + numeroSolicitud;
+            String cambioEstadoTarjeta = "UPDATE tarjeta set estado = \"ACTIVA\" where numero_solicitud = " + numeroSolicitud;
             Statement statementInsert = connection.createStatement();
             statementInsert.executeUpdate(cambioEstadoTarjeta);
         } catch (SQLException e) {
@@ -185,64 +243,4 @@ public class AutorizacionBE extends Tramite {
 
         return nuevoNumeroTarjeta;
     }
-
-    public boolean comprobarCumpleRequisitos() {
-        String selectUsuario = "SELECT * FROM usuario WHERE id_usuario like " + numeroSolicitud + "";
-        String selectTarjeta = "SELECT * FROM tarjeta WHERE numero_solicitud like " + numeroSolicitud + "";
-        double salarioNecesarioUsuario = 0;
-        String estadoTarjeta = "";
-        int limiteTarjeta = 0;
-        //4 comprobaciones:
-        //Que exista el numero de solicitud
-        //Salario mayor a 60%
-        //No esté autorizada
-        //No esté cancelada
-        
-        try {
-            //Ingresa a cliente
-            Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(selectUsuario);
-            //Existe el número de solicitud
-            if (!resultSet.next()) {
-                mensaje = "Número de solicitud inválido, no existente o erróneo";
-                return false;
-            }
-            
-            //Extrae el Salario
-            resultSet = statementInsert.executeQuery(selectUsuario);
-            while (resultSet.next()) {
-                salarioNecesarioUsuario = (resultSet.getInt("salario")* 0.6);
-            }
-            
-            //Ingresa a tarjeta y extrae los datos
-            resultSet = statementInsert.executeQuery(selectTarjeta);
-            while (resultSet.next()) {
-                estadoTarjeta = resultSet.getString("estado");
-                limiteTarjeta = resultSet.getInt("limite");
-            }
-            //Comprueba SALARIO MAYOR A 60%
-            if (!(salarioNecesarioUsuario >= limiteTarjeta)) {
-                mensaje = "Tú perfil no cumple con los requisitos para ser otorgada una tarjeta";
-                return false;
-            }
-
-            //La tarjeta no esté autorizada/cancelada/
-            if (estadoTarjeta.equals("AUTORIZADA")) {
-                mensaje = "Esta tarjeta ya ha sido autorizada";
-                return false;
-            } else if (estadoTarjeta.equals("CANCELADA")) {
-                mensaje = "Esta tarjeta está cancelada, no puede reactivarse";
-                return false;
-            } else if (!estadoTarjeta.equals("TRAMITE")) {
-                return false;
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("Error al consultar a la DB al autorizar");
-            e.printStackTrace();
-        }
-        
-        return true;
-    }
-
 }

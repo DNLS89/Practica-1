@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Tramite;
 
 import GestorTarjetasFE.ENUMTipoTarjeta;
@@ -11,11 +8,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author debian
- */
+
 public class SolicitudBE extends Tramite{
     //USUARIO
     private String nombreUsuario;
@@ -73,7 +68,6 @@ public class SolicitudBE extends Tramite{
             txtNoSolicitud.setText("Su número de solicitud es: " + numeroSolicitud);
         }
         
-        //
-        
+        JOptionPane.showMessageDialog(null, "Solicitud Procesada", "", JOptionPane.PLAIN_MESSAGE);
     }
 }

@@ -5,6 +5,8 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
+import Tramite.CancelacionBE;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +14,6 @@ import javax.swing.JOptionPane;
  * @author debian
  */
 public class Cancelacion extends javax.swing.JPanel {
-
     private SQL sql;
     /**
      * Creates new form solicitud
@@ -21,7 +22,15 @@ public class Cancelacion extends javax.swing.JPanel {
         this.sql = sql;
         initComponents();
     }
+    
+    public JLabel getTxtDireccion() {
+        return txtDireccion;
+    }
 
+    public JLabel getTxtNombreUsuario() {
+        return txtNombreUsuario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +46,9 @@ public class Cancelacion extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtNumeroTarjeta = new javax.swing.JTextField();
         btnAutorizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombreUsuario = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(980, 440));
 
@@ -66,6 +78,12 @@ public class Cancelacion extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setText("Datos Dueño Tarjeta:");
+
+        txtNombreUsuario.setText("Nombre:");
+
+        txtDireccion.setText("Dirección: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,8 +105,17 @@ public class Cancelacion extends javax.swing.JPanel {
                         .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(181, 181, 181)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +128,13 @@ public class Cancelacion extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNombreUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtDireccion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(btnAutorizar)
                 .addGap(39, 39, 39))
         );
@@ -136,6 +169,8 @@ public class Cancelacion extends javax.swing.JPanel {
     private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
         // TODO add your handling code here:
         if (camposLlenadosCorrectamente()) {
+            CancelacionBE cancelacionBE = new CancelacionBE(txtNumeroTarjeta.getText(), sql, this);
+            cancelacionBE.mostrarDatosInterfaz();
             
         }
     }//GEN-LAST:event_btnAutorizarActionPerformed
@@ -153,9 +188,12 @@ public class Cancelacion extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAutorizar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel txtDireccion;
+    private javax.swing.JLabel txtNombreUsuario;
     private javax.swing.JTextField txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
 }
