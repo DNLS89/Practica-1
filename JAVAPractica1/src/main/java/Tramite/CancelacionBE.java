@@ -2,6 +2,7 @@ package Tramite;
 
 import GestorTarjetasFE.Cancelacion;
 import SQL.SQL;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,16 +100,16 @@ public class CancelacionBE extends Tramite{
     
     public boolean comprobarCumpleSaldoPendiente() {
         String selectTarjetaCancelar = "SELECT * FROM tarjeta WHERE numero_tarjeta like \"" + numeroTarjetaCancelar+ "\"";
-        int saldoPendiente = 0;
+        BigDecimal saldoPendiente = new BigDecimal("0.00");
         
         try {
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(selectTarjetaCancelar);
             //Extrae cantidad saldo pendiente
             resultSet.next();
-            saldoPendiente = resultSet.getInt("saldo_pendiente");
+            saldoPendiente = resultSet.getBigDecimal("saldo");
             
-            if (saldoPendiente == 0) {
+            if (saldoPendiente.equals(0.00)) {
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "La tarjeta no puede cancelarse hasta que pague el saldo pendiente", "", JOptionPane.PLAIN_MESSAGE);

@@ -5,6 +5,8 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
+import Tramite.MovimientoBE;
+import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,6 +22,7 @@ public class Movimiento extends javax.swing.JPanel {
     public Movimiento(SQL sql) {
         this.sql = sql;
         initComponents();
+        txtDescripcionMov.setLineWrap(true);
     }
 
     /**
@@ -42,11 +45,12 @@ public class Movimiento extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtFechaMov = new javax.swing.JTextField();
         txtNumeroTarjeta = new javax.swing.JTextField();
-        txtTipoMovimiento = new javax.swing.JTextField();
-        txtDescripcionMov = new javax.swing.JTextField();
         txtEstablecimientoMov = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
         btnProcesarSolicitud = new javax.swing.JButton();
+        tipoMovimiento = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcionMov = new javax.swing.JTextArea();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(980, 440));
 
@@ -83,12 +87,6 @@ public class Movimiento extends javax.swing.JPanel {
             }
         });
 
-        txtDescripcionMov.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionMovActionPerformed(evt);
-            }
-        });
-
         txtEstablecimientoMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtEstablecimientoMovActionPerformed(evt);
@@ -113,36 +111,16 @@ public class Movimiento extends javax.swing.JPanel {
             }
         });
 
+        tipoMovimiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CARGO", "ABONO" }));
+
+        txtDescripcionMov.setColumns(20);
+        txtDescripcionMov.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcionMov);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(445, 445, 445)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(labelFecha)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel7))
-                .addGap(157, 157, 157)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtDescripcionMov, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(60, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTipoMovimiento)
-                            .addComponent(txtNumeroTarjeta)
-                            .addComponent(txtEstablecimientoMov)
-                            .addComponent(txtMonto)
-                            .addComponent(txtFechaMov))
-                        .addGap(156, 156, 156))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,41 +130,73 @@ public class Movimiento extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnProcesarSolicitud)
                         .addGap(398, 398, 398))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(445, 445, 445)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(labelFecha)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(157, 157, 157)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(tipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                            .addComponent(txtEstablecimientoMov)
+                            .addComponent(txtMonto)
+                            .addComponent(txtFechaMov))
+                        .addGap(156, 156, 156))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel5)
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFechaMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelFecha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtTipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEstablecimientoMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(txtDescripcionMov, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(btnProcesarSolicitud)
-                .addGap(50, 50, 50))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(tipoMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelFecha)
+                            .addComponent(txtFechaMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEstablecimientoMov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnProcesarSolicitud)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(138, 138, 138))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,9 +224,16 @@ public class Movimiento extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFechaMovActionPerformed
 
     public boolean camposLlenadosCorrectamente() {
-        if (txtFechaMov.getText().isBlank() || txtNumeroTarjeta.getText().isBlank() || txtTipoMovimiento.getText().isBlank()
-                || txtDescripcionMov.getText().isBlank() || txtEstablecimientoMov.getText().isBlank() || txtMonto.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Llena el apartado para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+        try {
+            BigDecimal PRUEBA = new BigDecimal(txtMonto.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Los valores ingresados en \"Monto\" son incorrectos", "ERROR", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+        
+        if (txtFechaMov.getText().isBlank() || txtNumeroTarjeta.getText().isBlank() ||txtDescripcionMov.getText().isBlank() 
+                || txtEstablecimientoMov.getText().isBlank() || txtMonto.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Llena todos los apartados para hacer el movimiento", "ERROR", JOptionPane.PLAIN_MESSAGE);
             return false;
         }
         
@@ -225,8 +242,12 @@ public class Movimiento extends javax.swing.JPanel {
     
     private void btnProcesarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarSolicitudActionPerformed
         // TODO add your handling code here:
+        
         if (camposLlenadosCorrectamente()) {
-            
+            BigDecimal monto = new BigDecimal(txtMonto.getText());
+            MovimientoBE movimientoBE = new MovimientoBE(sql, tipoMovimiento.getSelectedIndex(), txtFechaMov.getText(),
+            txtNumeroTarjeta.getText(), txtEstablecimientoMov.getText(), monto, txtDescripcionMov.getText());
+            movimientoBE.procesarTramite();
         }
     }//GEN-LAST:event_btnProcesarSolicitudActionPerformed
 
@@ -236,17 +257,7 @@ public class Movimiento extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFechaMovKeyTyped
 
     private void txtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMontoKeyTyped
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        
-        if (!Character.isDigit(c)) {
-            evt.consume();
-        }
     }//GEN-LAST:event_txtMontoKeyTyped
-
-    private void txtDescripcionMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionMovActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionMovActionPerformed
 
     private void txtEstablecimientoMovActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEstablecimientoMovActionPerformed
         // TODO add your handling code here:
@@ -263,12 +274,13 @@ public class Movimiento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelFecha;
-    private javax.swing.JTextField txtDescripcionMov;
+    private javax.swing.JComboBox<String> tipoMovimiento;
+    private javax.swing.JTextArea txtDescripcionMov;
     private javax.swing.JTextField txtEstablecimientoMov;
     private javax.swing.JTextField txtFechaMov;
     private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtNumeroTarjeta;
-    private javax.swing.JTextField txtTipoMovimiento;
     // End of variables declaration//GEN-END:variables
 }
