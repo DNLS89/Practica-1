@@ -200,7 +200,7 @@
         <mxCell id="HQOiN5AQCsMCG7mMh8zH-66" value="saldo_pendiente" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="705" y="1140" width="105" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="HQOiN5AQCsMCG7mMh8zH-67" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Solicitar&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="HQOiN5AQCsMCG7mMh8zH-67" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;CREAR&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="680" y="820" width="190" height="60" as="geometry" />
         </mxCell>
       </root>
