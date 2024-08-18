@@ -70,6 +70,7 @@ public class Movimiento extends javax.swing.JPanel {
 
         jLabel2.setText("Monto:");
 
+        txtFechaMov.setText("dd/mm/aaaa");
         txtFechaMov.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFechaMovActionPerformed(evt);
@@ -253,6 +254,7 @@ public class Movimiento extends javax.swing.JPanel {
 
     private void txtFechaMovKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaMovKeyTyped
         // TODO add your handling code here:
+        
         
     }//GEN-LAST:event_txtFechaMovKeyTyped
 

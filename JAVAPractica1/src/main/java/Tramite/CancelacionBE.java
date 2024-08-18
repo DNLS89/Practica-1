@@ -101,6 +101,7 @@ public class CancelacionBE extends Tramite{
     public boolean comprobarCumpleSaldoPendiente() {
         String selectTarjetaCancelar = "SELECT * FROM tarjeta WHERE numero_tarjeta like \"" + numeroTarjetaCancelar+ "\"";
         BigDecimal saldoPendiente = new BigDecimal("0.00");
+        BigDecimal valorValidoCancelar = new BigDecimal("0.00");
         
         try {
             Statement statementInsert = connection.createStatement();
@@ -109,10 +110,15 @@ public class CancelacionBE extends Tramite{
             resultSet.next();
             saldoPendiente = resultSet.getBigDecimal("saldo");
             
-            if (saldoPendiente.equals(0.00)) {
+            
+            //if (saldoPendiente.equals(0.00)) {
+            //Abajo en el if el -1 significa menor y el 0 igual al valor
+            //Abajo tiene que ser igual o menor a 0
+            if (saldoPendiente.compareTo(valorValidoCancelar) == -1 || saldoPendiente.compareTo(valorValidoCancelar) == 0) {
                 return true;
             } else {
-                JOptionPane.showMessageDialog(null, "La tarjeta no puede cancelarse hasta que pague el saldo pendiente", "", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, "La tarjeta no puede cancelarse hasta que pague el saldo pendiente de \"" + saldoPendiente +  "\" "
+                        , "", JOptionPane.PLAIN_MESSAGE);
                 return false;
             }
         } catch (Exception e) {

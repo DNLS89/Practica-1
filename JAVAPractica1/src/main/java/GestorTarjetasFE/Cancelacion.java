@@ -179,7 +179,7 @@ public class Cancelacion extends javax.swing.JPanel {
         // TODO add your handling code here:
         char c = evt.getKeyChar();
         
-        if (!Character.isDigit(c)) {
+        if (!Character.isDigit(c) && !Character.isWhitespace(c)) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroTarjetaKeyTyped

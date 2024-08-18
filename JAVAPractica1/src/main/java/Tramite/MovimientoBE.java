@@ -6,6 +6,12 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -13,7 +19,8 @@ public class MovimientoBE extends Tramite{
     private SQL sql;
     private Connection connection;
     private int indiceTipoMovimiento;
-    private String fechaMOv;
+    private String fechaMov;
+    private java.sql.Date fechaFormatoSQL;
     private String numeroTarjeta;
     private String establecimientoMov;
     private String descripcionMov;
@@ -27,7 +34,7 @@ public class MovimientoBE extends Tramite{
         this.sql = sql;
         this.connection = sql.getConnection();
         this.indiceTipoMovimiento = indiceTipoMovimiento;
-        this.fechaMOv = fechaMov;
+        this.fechaMov = fechaMov;
         this.numeroTarjeta = numeroTarjeta;
         this.establecimientoMov = establecimientoMov;
         this.descripcionMov = descripcionMov;
@@ -36,9 +43,8 @@ public class MovimientoBE extends Tramite{
     
         @Override
     public void procesarTramite() {
-        if (comprobarCumpleExistenDatos()) {
+        if (comprobarCumpleExistenDatos() && formatoFechaAdecuado()) {
             extraerSaldo();
-            
             if (indiceTipoMovimiento == 0) {
                 //CARGO  GASTAR
                 if (saldoDisponible()) {
@@ -48,7 +54,55 @@ public class MovimientoBE extends Tramite{
                 //ABONO   AGREGAR
                 abonarTarjeta();
             }
+            
+            try {
+                crearRelacionMovimiento();
+            } catch (ParseException ex) {
+                System.out.println("Error creando relacion");
+                Logger.getLogger(MovimientoBE.class.getName()).log(Level.SEVERE, null, ex);
+            }
             JOptionPane.showMessageDialog(null, "Movimiento Realizado Exitosamente", "Proceso Realizado", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
+    public boolean formatoFechaAdecuado() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        
+        try {
+            this.fechaMov = fechaMov.replace("/", "-");
+            date = dateFormat.parse(fechaMov);
+            fechaFormatoSQL = new java.sql.Date(date.getTime());
+            
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+            return false;
+        }
+    }
+    
+    public void crearRelacionMovimiento() throws ParseException {
+        //Estraer datos usuario según el número de tarjeta, para esto extraer el numeor de solocitud
+        int idUsuario = 0;
+        int numeroSolicitud = 0;
+        String selectTarjetaMovimiento = "SELECT * FROM tarjeta WHERE numero_tarjeta like \"" + numeroTarjeta + "\"";
+        
+        try {
+            //Estraer datos usuario según el número de tarjeta, para esto extraer el numeor de solocitud
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(selectTarjetaMovimiento);
+            if (resultSet.next()) {
+                idUsuario = resultSet.getInt("numero_solicitud");
+                numeroSolicitud = idUsuario; 
+            }
+           //Ingresa los datos a la tabla de RELACION MOVIMIENTO
+           String comandoCrearRelacion = "INSERT INTO movimiento (id_usuario, numero_solicitud, fecha_movimiento, descripcion_movimiento, establecimiento_movimiento) "
+                + "VALUE ('" + idUsuario + "', '" + numeroSolicitud + "','" + fechaFormatoSQL + "','" + descripcionMov + "','" + establecimientoMov + "');";
+            statementInsert = connection.createStatement();
+            statementInsert.executeUpdate(comandoCrearRelacion);
+        } catch (Exception e) {
+            System.out.println("Error al ingresar datos de la relacion");
+            e.printStackTrace();
         }
     }
     
@@ -56,8 +110,6 @@ public class MovimientoBE extends Tramite{
         //Abajo el limite es según el tipo de tarjeta
         //Abajo en el if el -1 significa menor y el 0 igual al valor
         if ((saldoTarjeta.add(monto)).compareTo(limiteTarjeta) == -1 || (saldoTarjeta.add(monto)).compareTo(limiteTarjeta) == 0) {
-            System.out.println("Saldo tarjeta: " + saldoTarjeta + " Monto: " + monto + "Sumatoria: " + saldoTarjeta.add(monto));
-            System.out.println("LImite tarjeta: " + limiteTarjeta);
             //Hay suficiente dinero para gastar
             return true;
         } else {
@@ -147,5 +199,4 @@ public class MovimientoBE extends Tramite{
         
         return false;
     }
-    
 }
