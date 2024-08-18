@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GestorArchivo;
+package GestorTarjetasFE;
 
-import GestorTarjetasFE.Autorizacion;
-import GestorTarjetasFE.Cancelacion;
-import GestorTarjetasFE.Consultar;
-import GestorTarjetasFE.Movimiento;
-import GestorTarjetasFE.Solicitud;
+import GestorArchivo.GestorArchivoBE;
+import GestorTarjetasFE.AutorizacionFE;
+import GestorTarjetasFE.CancelacionFE;
+import GestorTarjetasFE.ConsultaFE;
+import GestorTarjetasFE.MovimientoFE;
+import GestorTarjetasFE.SolicitudFE;
 import SQL.SQL;
 import java.awt.BorderLayout;
 import java.io.Console;
@@ -18,14 +19,16 @@ import javax.swing.JPanel;
  *
  * @author debian
  */
-public class GestorTarjeta extends javax.swing.JPanel {
+public class GestorTarjetaFE extends javax.swing.JPanel {
 
     private SQL sql;
+    private GestorArchivoBE gestorArchivoBE;
     /**
      * Creates new form PruebaELIMINAR
      */
-    public GestorTarjeta(SQL sql) {
+    public GestorTarjetaFE(SQL sql, GestorArchivoBE gestorArchivoBE) {
         this.sql = sql;
+        this.gestorArchivoBE = gestorArchivoBE;
         initComponents();
     }
     
@@ -152,31 +155,31 @@ public class GestorTarjeta extends javax.swing.JPanel {
 
     private void btnCancelarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarTarjetaActionPerformed
         // TODO add your handling code here:
-        Cancelacion cancelacion = new Cancelacion(sql);
+        CancelacionFE cancelacion = new CancelacionFE(sql);
         showPanel(cancelacion);
     }//GEN-LAST:event_btnCancelarTarjetaActionPerformed
 
     private void btnSolicitarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarTarjetaActionPerformed
         // TODO add your handling code here:
-        Solicitud solicitud = new Solicitud(sql);
+        SolicitudFE solicitud = new SolicitudFE(sql);
         showPanel(solicitud);
     }//GEN-LAST:event_btnSolicitarTarjetaActionPerformed
 
     private void btnRegistrarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMovimientoActionPerformed
         // TODO add your handling code here:
-        Movimiento movimiento = new Movimiento(sql);
+        MovimientoFE movimiento = new MovimientoFE(sql);
         showPanel(movimiento);
     }//GEN-LAST:event_btnRegistrarMovimientoActionPerformed
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
-        Consultar consultar = new Consultar(sql);
+        ConsultaFE consultar = new ConsultaFE(sql, gestorArchivoBE);
         showPanel(consultar);
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnAutorizarTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarTarjetaActionPerformed
         // TODO add your handling code here:
-        Autorizacion autorizacion = new Autorizacion(sql);
+        AutorizacionFE autorizacion = new AutorizacionFE(sql);
         showPanel(autorizacion);
     }//GEN-LAST:event_btnAutorizarTarjetaActionPerformed
 

@@ -1,5 +1,5 @@
 
-package Tramite;
+package GestorTarjetasBE;
 
 import SQL.SQL;
 import java.math.BigDecimal;

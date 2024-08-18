@@ -2,10 +2,11 @@ package GestorArchivo;
 
 import SQL.SQL;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class GestorArchivo {
+public class GestorArchivoBE {
     
     //Abajo son arreglos en donde insgra la autorizacion dividida
 //    private String[] solicitud ;
@@ -15,16 +16,39 @@ public class GestorArchivo {
 //    private String tarjetaACancelar;
     private String[][] totalProcesos = new String[5][];
     private int velocidadProcesamiento;
-    private String path;
+    private File file;
     private SQL sql;
+    private boolean pathDefinido = false;
     
-    public GestorArchivo() {
-        this.sql = sql;
+    public GestorArchivoBE() {
+        file = new File("");
+        //System.out.println("Canonical: " + file.getCanonicalPath());
+        //System.out.println("Absoluto: " + file.getAbsolutePath());
+        //this.sql = sql;
         limpiarProcesos();
-        imprimirPruebaLinea();
-        System.out.println("FIN");
+        //imprimirPruebaLinea();
+        //System.out.println("FIN");
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public boolean getPathDefinido() {
+        return pathDefinido;
+    }
+
+    public void setPathDefinido(boolean pathDefinido) {
+        this.pathDefinido = pathDefinido;
     }
     
+    
+    
+      
     
     
     
@@ -39,10 +63,6 @@ public class GestorArchivo {
     private void indicarProcesamiento() {
         
     }
-    
-    
-    
-    
         
     public void limpiarProcesos() {
         String linea;

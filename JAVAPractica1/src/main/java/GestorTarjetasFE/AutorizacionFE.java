@@ -5,20 +5,20 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
-import Tramite.AutorizacionBE;
+import GestorTarjetasBE.AutorizacionBE;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author debian
  */
-public class Autorizacion extends javax.swing.JPanel {
+public class AutorizacionFE extends javax.swing.JPanel {
 
     private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Autorizacion(SQL sql) {
+    public AutorizacionFE(SQL sql) {
         this.sql = sql;
         initComponents();
     }

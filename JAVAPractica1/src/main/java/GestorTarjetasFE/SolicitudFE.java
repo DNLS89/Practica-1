@@ -5,7 +5,7 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
-import Tramite.SolicitudBE;
+import GestorTarjetasBE.SolicitudBE;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  *
  * @author debian
  */
-public class Solicitud extends javax.swing.JPanel {
+public class SolicitudFE extends javax.swing.JPanel {
 
     private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Solicitud(SQL sql) {
+    public SolicitudFE(SQL sql) {
         this.sql = sql;
         initComponents();
         //Mostar fecha de última solicitud

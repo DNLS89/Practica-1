@@ -5,7 +5,7 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
-import Tramite.MovimientoBE;
+import GestorTarjetasBE.MovimientoBE;
 import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
  *
  * @author debian
  */
-public class Movimiento extends javax.swing.JPanel {
+public class MovimientoFE extends javax.swing.JPanel {
 
     private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Movimiento(SQL sql) {
+    public MovimientoFE(SQL sql) {
         this.sql = sql;
         initComponents();
         txtDescripcionMov.setLineWrap(true);

@@ -1,4 +1,4 @@
-package Tramite;
+package GestorTarjetasBE;
 
 public abstract class Tramite {
     

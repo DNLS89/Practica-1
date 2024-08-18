@@ -1,9 +1,22 @@
-package FrontEnd;
+package ReportesFE;
+
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
 
 public class ReportesFE extends javax.swing.JPanel {
 
     public ReportesFE() {
         initComponents();
+    }
+    
+    public void showPanel(JPanel p) {
+        p.setSize(980, 440);
+        p.setLocation(0, 0);
+        
+        contenidoReportes.removeAll();
+        contenidoReportes.add(p, BorderLayout.CENTER);
+        contenidoReportes.revalidate();
+        contenidoReportes.repaint();
     }
 
     /**

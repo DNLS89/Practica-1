@@ -1,5 +1,5 @@
 
-package Tramite;
+package GestorTarjetasBE;
 
 import GestorTarjetasFE.ENUMTipoTarjeta;
 import SQL.SQL;

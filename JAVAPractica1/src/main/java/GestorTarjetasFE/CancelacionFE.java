@@ -5,23 +5,32 @@
 package GestorTarjetasFE;
 
 import SQL.SQL;
+import GestorTarjetasBE.CancelacionBE;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author debian
  */
-public class Consultar extends javax.swing.JPanel {
-
+public class CancelacionFE extends javax.swing.JPanel {
     private SQL sql;
     /**
      * Creates new form solicitud
      */
-    public Consultar(SQL sql) {
+    public CancelacionFE(SQL sql) {
         this.sql = sql;
         initComponents();
     }
+    
+    public JLabel getTxtDireccion() {
+        return txtDireccion;
+    }
 
+    public JLabel getTxtNombreUsuario() {
+        return txtNombreUsuario;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,15 +45,18 @@ public class Consultar extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNumeroTarjeta = new javax.swing.JTextField();
-        btnProcesarSolicitud = new javax.swing.JButton();
+        btnAutorizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombreUsuario = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(980, 440));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(980, 440));
 
-        jLabel5.setText("CONSULTAR ESTADO");
+        jLabel5.setText("CANCELAR TARJETA");
 
-        jLabel1.setText("Para consultar el estado de una tarjeta ingrese los siguientes datos:");
+        jLabel1.setText("Para cancelar una tarjeta ingrese los siguientes datos:");
 
         jLabel4.setText("Número de Tarjeta:");
 
@@ -59,12 +71,18 @@ public class Consultar extends javax.swing.JPanel {
             }
         });
 
-        btnProcesarSolicitud.setText("Consultar y Generar HTML");
-        btnProcesarSolicitud.addActionListener(new java.awt.event.ActionListener() {
+        btnAutorizar.setText("Cancelar Tarjeta");
+        btnAutorizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcesarSolicitudActionPerformed(evt);
+                btnAutorizarActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("Datos Dueño Tarjeta:");
+
+        txtNombreUsuario.setText("Nombre:");
+
+        txtDireccion.setText("Dirección: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,23 +90,32 @@ public class Consultar extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(474, 474, 474)
-                .addComponent(btnProcesarSolicitud)
-                .addGap(0, 303, Short.MAX_VALUE))
+                .addComponent(btnAutorizar)
+                .addGap(0, 368, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(273, 273, 273)
+                .addComponent(jLabel4)
+                .addGap(98, 98, 98)
+                .addComponent(txtNumeroTarjeta)
+                .addGap(179, 179, 179))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(445, 445, 445)
                         .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jLabel4)
-                        .addGap(170, 170, 170)
-                        .addComponent(txtNumeroTarjeta)))
-                .addGap(240, 240, 240))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(329, 329, 329))
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(83, 83, 83)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,12 +124,18 @@ public class Consultar extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(78, 78, 78)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNumeroTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
-                .addComponent(btnProcesarSolicitud)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNombreUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtDireccion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addComponent(btnAutorizar)
                 .addGap(39, 39, 39))
         );
 
@@ -133,12 +166,14 @@ public class Consultar extends javax.swing.JPanel {
         return true;
     }
     
-    private void btnProcesarSolicitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesarSolicitudActionPerformed
+    private void btnAutorizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutorizarActionPerformed
         // TODO add your handling code here:
         if (camposLlenadosCorrectamente()) {
+            CancelacionBE cancelacionBE = new CancelacionBE(txtNumeroTarjeta.getText(), sql, this);
+            cancelacionBE.mostrarDatosInterfaz();
             
         }
-    }//GEN-LAST:event_btnProcesarSolicitudActionPerformed
+    }//GEN-LAST:event_btnAutorizarActionPerformed
 
     private void txtNumeroTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaKeyTyped
         // TODO add your handling code here:
@@ -151,11 +186,14 @@ public class Consultar extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnProcesarSolicitud;
+    private javax.swing.JButton btnAutorizar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel txtDireccion;
+    private javax.swing.JLabel txtNombreUsuario;
     private javax.swing.JTextField txtNumeroTarjeta;
     // End of variables declaration//GEN-END:variables
 }

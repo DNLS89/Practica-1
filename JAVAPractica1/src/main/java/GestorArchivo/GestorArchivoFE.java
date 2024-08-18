@@ -2,13 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package FrontEnd;
+package GestorArchivo;
 
+import GestorArchivo.GestorArchivoBE;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
-public class GestorArchivos extends javax.swing.JPanel {
+public class GestorArchivoFE extends javax.swing.JPanel {
+    private GestorArchivoBE gestorArchivosBE;
 
-    public GestorArchivos() {
+    public GestorArchivoFE(GestorArchivoBE gestorArchivoBE) {
+        this.gestorArchivosBE = gestorArchivoBE;
+        
         initComponents();
     }
 
@@ -22,26 +30,26 @@ public class GestorArchivos extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnInputFile = new javax.swing.JButton();
-        btnPathSelector = new javax.swing.JButton();
+        btnAbrirArchivo = new javax.swing.JButton();
+        btnEscogerPath = new javax.swing.JButton();
         txtProcesamiento = new javax.swing.JLabel();
         valorProcesamiento = new javax.swing.JTextField();
-        btnProcesamiento = new javax.swing.JButton();
+        btnIngresarProcesamiento = new javax.swing.JButton();
         txtLog = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1029, 520));
 
-        btnInputFile.setText("Abrir un Archivo");
-        btnInputFile.addActionListener(new java.awt.event.ActionListener() {
+        btnAbrirArchivo.setText("Abrir un Archivo");
+        btnAbrirArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInputFileActionPerformed(evt);
+                btnAbrirArchivoActionPerformed(evt);
             }
         });
 
-        btnPathSelector.setText("Escoger Ruta Reportes");
-        btnPathSelector.addActionListener(new java.awt.event.ActionListener() {
+        btnEscogerPath.setText("Escoger Ruta Reportes");
+        btnEscogerPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPathSelectorActionPerformed(evt);
+                btnEscogerPathActionPerformed(evt);
             }
         });
 
@@ -53,10 +61,10 @@ public class GestorArchivos extends javax.swing.JPanel {
             }
         });
 
-        btnProcesamiento.setText("Ingresar valor");
-        btnProcesamiento.addActionListener(new java.awt.event.ActionListener() {
+        btnIngresarProcesamiento.setText("Ingresar valor");
+        btnIngresarProcesamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProcesamientoActionPerformed(evt);
+                btnIngresarProcesamientoActionPerformed(evt);
             }
         });
 
@@ -76,13 +84,13 @@ public class GestorArchivos extends javax.swing.JPanel {
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtLog, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(447, 447, 447)
-                        .addComponent(btnInputFile))
+                        .addComponent(btnAbrirArchivo))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(431, 431, 431)
-                        .addComponent(btnPathSelector)))
+                        .addComponent(btnEscogerPath)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,14 +102,14 @@ public class GestorArchivos extends javax.swing.JPanel {
                         .addComponent(txtLog))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(btnInputFile)
+                        .addComponent(btnAbrirArchivo)
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtProcesamiento)
                             .addComponent(valorProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(44, 44, 44)
-                .addComponent(btnPathSelector)
+                .addComponent(btnEscogerPath)
                 .addContainerGap(183, Short.MAX_VALUE))
         );
 
@@ -119,28 +127,35 @@ public class GestorArchivos extends javax.swing.JPanel {
 
     
     JFileChooser f = new JFileChooser();
-    private void btnInputFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInputFileActionPerformed
+    private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
         // TODO add your handling code here:
         //JFileChooser f = new JFileChooser();
         System.out.println(f.showOpenDialog(null));
         System.out.println(f.getCurrentDirectory());
         System.out.println(f.getSelectedFile());
-    }//GEN-LAST:event_btnInputFileActionPerformed
+    }//GEN-LAST:event_btnAbrirArchivoActionPerformed
 
-    private void btnPathSelectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPathSelectorActionPerformed
+    private void btnEscogerPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerPathActionPerformed
         // TODO add your handling code here:
         f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
         f.showOpenDialog(null);
 
-        System.out.println(f.getCurrentDirectory());
-        System.out.println(f.getSelectedFile());
-    }//GEN-LAST:event_btnPathSelectorActionPerformed
+        //
+        //File h = new File("" + f.getCurrentDirectory() + "");
+        File h = new File("" + f.getSelectedFile() + "");
+        
+        gestorArchivosBE.setFile(h);
+        gestorArchivosBE.setPathDefinido(true);
+        // gestorArchivosBE.setPathSalida(f.getCurrentDirectory());
+            
+            //System.out.println(f.getSelectedFile());
+    }//GEN-LAST:event_btnEscogerPathActionPerformed
 
     private void valorProcesamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorProcesamientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valorProcesamientoActionPerformed
 
-    private void btnProcesamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcesamientoActionPerformed
+    private void btnIngresarProcesamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProcesamientoActionPerformed
         // TODO add your handling code here:
         if (!valorProcesamiento.getText().isEmpty()) {
             System.out.println("Tiempo de procesamiento: " + valorProcesamiento.getText());
@@ -148,13 +163,13 @@ public class GestorArchivos extends javax.swing.JPanel {
             txtLog.setText("No hay ningún valor de procesamiento ingresado, ingrese un valor de válido!");
         }
         
-    }//GEN-LAST:event_btnProcesamientoActionPerformed
+    }//GEN-LAST:event_btnIngresarProcesamientoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnInputFile;
-    private javax.swing.JButton btnPathSelector;
-    private javax.swing.JButton btnProcesamiento;
+    private javax.swing.JButton btnAbrirArchivo;
+    private javax.swing.JButton btnEscogerPath;
+    private javax.swing.JButton btnIngresarProcesamiento;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txtLog;
     private javax.swing.JLabel txtProcesamiento;

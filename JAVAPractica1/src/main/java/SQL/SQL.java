@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SQL {
@@ -26,6 +28,11 @@ public class SQL {
     
     public void establecerConexion() {
         try {
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+            }
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
             
         } catch (SQLException e) {
@@ -34,15 +41,14 @@ public class SQL {
         }
         
         //Tratar ver si existe una base de datos, tal vez lo mejor es ver si existen datos
-        try {
-            Statement statementInsert = connection.createStatement();
-            //Abajo lo de la derecha regresa la cantidad de rows modificadas al igual que en la terminal por si es que nos interesa
-            System.out.println("previo");
-            int exists = statementInsert.executeUpdate("SELECT EXISTS(SELECT 1 FROM yourTableName)");
-            System.out.println("PRUEBA AHORA: " + exists);
-        } catch (Exception e) {
-            System.out.println("ERROR PRUEBA");
-        }
+//        try {
+//            Statement statementInsert = connection.createStatement();
+//            //Abajo lo de la derecha regresa la cantidad de rows modificadas al igual que en la terminal por si es que nos interesa
+//            int exists = statementInsert.executeUpdate("SELECT EXISTS(SELECT 1 FROM yourTableName)");
+//            System.out.println("PRUEBA AHORA: " + exists);
+//        } catch (Exception e) {
+//            System.out.println("ERROR PRUEBA");
+//        }
     }
     
     public void leer_EscribirDB(){

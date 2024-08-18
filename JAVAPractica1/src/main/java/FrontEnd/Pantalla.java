@@ -4,7 +4,10 @@
  */
 package FrontEnd;
 
-import GestorArchivo.GestorTarjeta;
+import ReportesFE.ReportesFE;
+import GestorArchivo.GestorArchivoFE;
+import GestorArchivo.GestorArchivoBE;
+import GestorTarjetasFE.GestorTarjetaFE;
 import SQL.SQL;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -12,11 +15,13 @@ import javax.swing.JPanel;
 public class Pantalla extends javax.swing.JFrame {
 
     private SQL sql;
+    private final GestorArchivoBE gestorArchivosBE = new GestorArchivoBE();
     
     public Pantalla(SQL sql) {
         this.sql = sql;
         initComponents();
-        
+        GestorArchivoFE gestorArchivosFE = new GestorArchivoFE(gestorArchivosBE);
+        showPanel(gestorArchivosFE);
     }
     
     public void showPanel(JPanel p) {
@@ -123,14 +128,14 @@ public class Pantalla extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        GestorArchivos menu = new GestorArchivos();
-        showPanel(menu);
+        GestorArchivoFE gestorArchivosFE = new GestorArchivoFE(gestorArchivosBE);
+        showPanel(gestorArchivosFE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        GestorTarjeta prueba = new GestorTarjeta(sql);
-        showPanel(prueba);
+        GestorTarjetaFE gestorTarjetaFE = new GestorTarjetaFE(sql, gestorArchivosBE);
+        showPanel(gestorTarjetaFE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

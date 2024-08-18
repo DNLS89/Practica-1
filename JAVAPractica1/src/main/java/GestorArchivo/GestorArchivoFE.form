@@ -46,16 +46,16 @@
                           <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="txtLog" min="-2" pref="667" max="-2" attributes="0"/>
-                              <Component id="btnProcesamiento" min="-2" pref="144" max="-2" attributes="0"/>
+                              <Component id="btnIngresarProcesamiento" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="447" max="-2" attributes="0"/>
-                          <Component id="btnInputFile" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAbrirArchivo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="431" max="-2" attributes="0"/>
-                          <Component id="btnPathSelector" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEscogerPath" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -72,37 +72,37 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="btnInputFile" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAbrirArchivo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="valorProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnProcesamiento" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="btnIngresarProcesamiento" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="btnPathSelector" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEscogerPath" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="183" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnInputFile">
+        <Component class="javax.swing.JButton" name="btnAbrirArchivo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Abrir un Archivo"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInputFileActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbrirArchivoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnPathSelector">
+        <Component class="javax.swing.JButton" name="btnEscogerPath">
           <Properties>
             <Property name="text" type="java.lang.String" value="Escoger Ruta Reportes"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPathSelectorActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEscogerPathActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="txtProcesamiento">
@@ -115,12 +115,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valorProcesamientoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnProcesamiento">
+        <Component class="javax.swing.JButton" name="btnIngresarProcesamiento">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingresar valor"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProcesamientoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProcesamientoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="txtLog">

@@ -1,6 +1,6 @@
-package Tramite;
+package GestorTarjetasBE;
 
-import GestorTarjetasFE.Cancelacion;
+import GestorTarjetasFE.CancelacionFE;
 import SQL.SQL;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -17,12 +17,12 @@ public class CancelacionBE extends Tramite{
     private String numeroTarjetaCancelar;
     private SQL sql;
     private Connection connection;
-    private Cancelacion cancelacionFE;
+    private CancelacionFE cancelacionFE;
     private String nombreUsuario = "";
     private String direccionUsuario = "";
     
     //Constructor para la GUI
-    public CancelacionBE(String numeroTarjetaCancelar, SQL sql, Cancelacion cancelacionFE) {
+    public CancelacionBE(String numeroTarjetaCancelar, SQL sql, CancelacionFE cancelacionFE) {
         this.numeroTarjetaCancelar = numeroTarjetaCancelar;
         this.sql = sql;
         this.connection = sql.getConnection();
