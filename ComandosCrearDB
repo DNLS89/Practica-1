@@ -1,0 +1,37 @@
+create schema PRUEBA2;
+use PRUEBA2;
+
+                                          IDENTIDAD USUARIO
+create table usuario (
+id_usuario int not null auto_increment, 
+nombre varchar(100) not null, 
+direccion varchar(100) not null, 
+salario int not null,  
+CONSTRAINT PK_USUARIO PRIMARY KEY(id_usuario));
+
+                                           IDENTIDAD TARJETA
+create table tarjeta (
+numero_solicitud int not null auto_increment,
+tipo varchar(15) not null,
+limite int not null,
+estado varchar(15) not null,
+numero_tarjeta varchar(20),
+saldo DECIMAL(10,2) DEFAULT "0.00",
+fecha_creacion date,
+fecha_cancelacion date,
+fecha_ultima_modificacion date,
+constraint Pk_TARJETA primary key(numero_solicitud));
+
+                                               RELACION Movimiento
+create table movimiento (
+id_usuario int not null,
+numero_solicitud int not null,
+fecha_movimiento date,
+monto DECIMAL(10,2),
+tipoMov varchar(10),
+interes DECIMAL(10,2),
+descripcion_movimiento varchar(300),
+establecimiento_movimiento varchar(30),
+CONSTRAINT FK_USUARIO_IN_ID FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+CONSTRAINT FK_TARJETA_IN_NUMERO_SOLICITUD
+FOREIGN KEY (numero_solicitud) REFERENCES tarjeta(numero_solicitud));
