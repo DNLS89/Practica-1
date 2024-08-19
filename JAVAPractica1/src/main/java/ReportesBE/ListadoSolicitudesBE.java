@@ -171,8 +171,8 @@ public class ListadoSolicitudesBE extends Reporte {
         File h;
         //No tarjeta, tipo tarjeta, limite, nombre, dirección, estado de tarjeta
         String html = ("<div><h1>Listado Solicitudes</h1><p></p>");
-        if (gestorArchivoBE.getPathDefinido()) {
-            h = new File(gestorArchivoBE.getFile().getCanonicalPath() + "/ListadoSolicitudes.html");
+        if (gestorArchivoBE.getPathDefinidoSalida()) {
+            h = new File(gestorArchivoBE.getFileSalida().getCanonicalPath() + "/ListadoSolicitudes.html");
         } else {
             h = new File("ListadoSolicitudes.html");
         }

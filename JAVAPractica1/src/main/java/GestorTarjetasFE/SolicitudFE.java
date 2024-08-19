@@ -190,7 +190,7 @@ public class SolicitudFE extends javax.swing.JPanel {
         
         if (camposLlenadosCorrectamente()) {
             SolicitudBE solicitudBE = new SolicitudBE(sql, txtNombreSolicitante.getText(), txtDireccion.getText(),
-                    Integer.valueOf(txtSalario.getText()), selectorTipo.getSelectedIndex(), txtNoSolicitud);
+                    Integer.valueOf(txtSalario.getText()), selectorTipo.getSelectedIndex(), txtNoSolicitud, true);
         }
         
     }//GEN-LAST:event_btnProcesarSolicitudActionPerformed

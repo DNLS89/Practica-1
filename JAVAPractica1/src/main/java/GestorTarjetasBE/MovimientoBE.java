@@ -52,7 +52,7 @@ public class MovimientoBE extends Tramite{
         if (comprobarCumpleExistenDatos() && formatoFechaAdecuado()) {
             extraerSaldo();
             if (indiceTipoMovimiento == 0) {
-                //CARGO  GASTAR
+                //CARGO  GASTAR 0
                 tipoMovmiento = "CARGO";
                 if (saldoDisponible()) {
                     cargoTarjeta();

@@ -129,8 +129,8 @@ public class EstadoCuentaBE extends Reporte {
         File h;
         //No tarjeta, tipo tarjeta, limite, nombre, dirección, estado de tarjeta
         String html = ("<div><h1>Estado Cuenta Tarjeta \"" + numeroTarjeta + "\" </h1><p></p>");
-        if (gestorArchivoBE.getPathDefinido()) {
-            h = new File(gestorArchivoBE.getFile().getCanonicalPath() + "/EstadoCuenta.html");
+        if (gestorArchivoBE.getPathDefinidoSalida()) {
+            h = new File(gestorArchivoBE.getFileSalida().getCanonicalPath() + "/EstadoCuenta.html");
         } else {
             h = new File("EstadoCuenta.html");
         }

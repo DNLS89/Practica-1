@@ -24,8 +24,9 @@ public class SolicitudBE extends Tramite{
     private String estado;
     private SQL sql;
     private JLabel txtNoSolicitud;
+    private boolean esGUI;
     
-    public SolicitudBE(SQL sql, String nombreUsuario, String direccion, int salario, int tipo, JLabel txtNoSolicitud) {
+    public SolicitudBE(SQL sql, String nombreUsuario, String direccion, int salario, int tipo, JLabel txtNoSolicitud, boolean esGUI) {
         this.sql = sql;
         
         //DATOS USUARIO
@@ -33,6 +34,34 @@ public class SolicitudBE extends Tramite{
         this.direccion = direccion;
         this.salario = salario;
         this.txtNoSolicitud = txtNoSolicitud;
+        this.esGUI = esGUI;
+        
+        
+        //DATOS TAREJTA
+        //1 Nacional, 2 Regional, 3 Internacional
+        this.tipo = ENUMTipoTarjeta.values()[tipo];
+        //Abajo que se escoja en base al tipo de arriba
+        if (ENUMTipoTarjeta.values()[tipo] == ENUMTipoTarjeta.NACIONAL) {
+            this.limiteTarjeta = 5000;
+        } else if (ENUMTipoTarjeta.values()[tipo] == ENUMTipoTarjeta.REGIONAL) {
+            this.limiteTarjeta = 10000;
+        } else {
+           this.limiteTarjeta = 20000;
+        }
+        this.estado = "TRAMITE";
+        
+        procesarTramite();
+    }
+    
+    public SolicitudBE(SQL sql, String nombreUsuario, String direccion, int salario, int tipo, boolean esGUI) {
+        this.sql = sql;
+        
+        //DATOS USUARIO
+        this.nombreUsuario = nombreUsuario;
+        this.direccion = direccion;
+        this.salario = salario;
+        this.txtNoSolicitud = txtNoSolicitud;
+        this.esGUI = esGUI;
         
         
         //DATOS TAREJTA
@@ -65,7 +94,9 @@ public class SolicitudBE extends Tramite{
         //Abajo muestra el último numero de solicitud
         numeroSolicitud = sql.escribirDatosSolicitudSQL(comandoUsuario, comandoTarjeta);
         if (!numeroSolicitud.equals("")) {
-            txtNoSolicitud.setText("Su número de solicitud es: " + numeroSolicitud);
+            if (esGUI) {
+                txtNoSolicitud.setText("Su número de solicitud es: " + numeroSolicitud);
+            }
         }
         
         JOptionPane.showMessageDialog(null, "Solicitud Procesada", "", JOptionPane.PLAIN_MESSAGE);

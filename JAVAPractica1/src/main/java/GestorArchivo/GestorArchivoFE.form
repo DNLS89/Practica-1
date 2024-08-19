@@ -39,62 +39,67 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="634" max="-2" attributes="0"/>
+                          <Component id="txtLog" min="-2" pref="667" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                           <Component id="txtProcesamiento" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="valorProcesamiento" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtLog" min="-2" pref="667" max="-2" attributes="0"/>
-                              <Component id="btnIngresarProcesamiento" min="-2" pref="144" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="447" max="-2" attributes="0"/>
-                          <Component id="btnAbrirArchivo" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="431" max="-2" attributes="0"/>
-                          <Component id="btnEscogerPath" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnIngresarProcesamiento" min="-2" pref="139" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="202" max="-2" attributes="0"/>
+                          <Component id="btnRutaYAbrir" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
+                          <Component id="btnEscogerPath" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
+                          <Component id="txtNoSolicitud" min="-2" pref="353" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                          <Component id="txtLog" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                          <Component id="btnAbrirArchivo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="valorProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnIngresarProcesamiento" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnEscogerPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnRutaYAbrir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="btnEscogerPath" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="183" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                  <Component id="txtLog" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="valorProcesamiento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnIngresarProcesamiento" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <Component id="txtNoSolicitud" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnAbrirArchivo">
+        <Component class="javax.swing.JButton" name="btnRutaYAbrir">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Abrir un Archivo"/>
+            <Property name="text" type="java.lang.String" value="Escoger un Archivo y Abrir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAbrirArchivoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRutaYAbrirActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEscogerPath">
@@ -117,13 +122,18 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnIngresarProcesamiento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ingresar valor"/>
+            <Property name="text" type="java.lang.String" value="Definir Tiempo"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarProcesamientoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="txtLog">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="txtNoSolicitud">
           <Properties>
             <Property name="text" type="java.lang.String" value=" "/>
           </Properties>

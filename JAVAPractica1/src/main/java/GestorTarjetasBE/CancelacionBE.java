@@ -65,6 +65,8 @@ public class CancelacionBE extends Tramite{
                 resultSet.next();
                 String nombreUsuario = resultSet.getString("nombre");
                 String direccionUsuario = resultSet.getString("direccion");
+                
+                
                 //Ingresa los datos al FE
                 cancelacionFE.getTxtDireccion().setText("Dirección: " + direccionUsuario);
                 cancelacionFE.getTxtNombreUsuario().setText("Nombre: " + nombreUsuario);

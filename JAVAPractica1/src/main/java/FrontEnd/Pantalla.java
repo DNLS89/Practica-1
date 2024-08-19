@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 public class Pantalla extends javax.swing.JFrame {
 
     private SQL sql;
-    private final GestorArchivoBE gestorArchivosBE = new GestorArchivoBE();
+    private final GestorArchivoBE gestorArchivosBE;
     
     public Pantalla(SQL sql) {
         this.sql = sql;
+        this.gestorArchivosBE = new GestorArchivoBE(sql);
+        
         initComponents();
         GestorArchivoFE gestorArchivosFE = new GestorArchivoFE(gestorArchivosBE);
         showPanel(gestorArchivosFE);

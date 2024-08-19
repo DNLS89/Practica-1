@@ -105,8 +105,8 @@ public class ConsultaBE extends Tramite {
         File h;
         //No tarjeta, tipo tarjeta, limite, nombre, dirección, estado de tarjeta
         String html = ("<div><h1>Consulta Tarjeta \"" + numeroTarjeta + "\" </h1><p></p>");
-        if (gestorArchivoBE.getPathDefinido()) {
-            h = new File(gestorArchivoBE.getFile().getCanonicalPath() + "/Consultas1.html");
+        if (gestorArchivoBE.getPathDefinidoSalida()) {
+            h = new File(gestorArchivoBE.getFileSalida().getCanonicalPath() + "/Consultas1.html");
         } else {
             h = new File("Consultas1.html");
         }

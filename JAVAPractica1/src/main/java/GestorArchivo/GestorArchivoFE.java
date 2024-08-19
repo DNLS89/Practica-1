@@ -30,19 +30,20 @@ public class GestorArchivoFE extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAbrirArchivo = new javax.swing.JButton();
+        btnRutaYAbrir = new javax.swing.JButton();
         btnEscogerPath = new javax.swing.JButton();
         txtProcesamiento = new javax.swing.JLabel();
         valorProcesamiento = new javax.swing.JTextField();
         btnIngresarProcesamiento = new javax.swing.JButton();
         txtLog = new javax.swing.JLabel();
+        txtNoSolicitud = new javax.swing.JLabel();
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1029, 520));
 
-        btnAbrirArchivo.setText("Abrir un Archivo");
-        btnAbrirArchivo.addActionListener(new java.awt.event.ActionListener() {
+        btnRutaYAbrir.setText("Escoger un Archivo y Abrir");
+        btnRutaYAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAbrirArchivoActionPerformed(evt);
+                btnRutaYAbrirActionPerformed(evt);
             }
         });
 
@@ -61,7 +62,7 @@ public class GestorArchivoFE extends javax.swing.JPanel {
             }
         });
 
-        btnIngresarProcesamiento.setText("Ingresar valor");
+        btnIngresarProcesamiento.setText("Definir Tiempo");
         btnIngresarProcesamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarProcesamientoActionPerformed(evt);
@@ -70,6 +71,8 @@ public class GestorArchivoFE extends javax.swing.JPanel {
 
         txtLog.setText(" ");
 
+        txtNoSolicitud.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -77,40 +80,45 @@ public class GestorArchivoFE extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(634, 634, 634)
+                        .addComponent(txtLog, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
                         .addComponent(txtProcesamiento)
                         .addGap(50, 50, 50)
                         .addComponent(valorProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLog, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(447, 447, 447)
-                        .addComponent(btnAbrirArchivo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(431, 431, 431)
-                        .addComponent(btnEscogerPath)))
+                        .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(btnRutaYAbrir)
+                        .addGap(289, 289, 289)
+                        .addComponent(btnEscogerPath))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(txtNoSolicitud, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(txtLog))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(btnAbrirArchivo)
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtProcesamiento)
-                            .addComponent(valorProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(44, 44, 44)
-                .addComponent(btnEscogerPath)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGap(134, 134, 134)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEscogerPath)
+                    .addComponent(btnRutaYAbrir))
+                .addGap(93, 93, 93)
+                .addComponent(txtLog)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProcesamiento)
+                    .addComponent(valorProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIngresarProcesamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(txtNoSolicitud)
+                .addGap(82, 82, 82))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -127,13 +135,28 @@ public class GestorArchivoFE extends javax.swing.JPanel {
 
     
     JFileChooser f = new JFileChooser();
-    private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
+    private void btnRutaYAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRutaYAbrirActionPerformed
         // TODO add your handling code here:
         //JFileChooser f = new JFileChooser();
-        System.out.println(f.showOpenDialog(null));
+        //System.out.println(f.showOpenDialog(null));
+        
+        gestorArchivosBE.abrirArchivo();
+        
+        /*
+        
+        f.showOpenDialog(null);
+       //Abajo imprime solo el path, voy a usar este para que escoja el archivo con cierto nombre
+        File h = new File("" + f.getCurrentDirectory() + "");
+        gestorArchivosBE.setPathEntrada(f.getCurrentDirectory().toString());
         System.out.println(f.getCurrentDirectory());
-        System.out.println(f.getSelectedFile());
-    }//GEN-LAST:event_btnAbrirArchivoActionPerformed
+        gestorArchivosBE.setFileEntrada(h);
+        gestorArchivosBE.setPathDefinidoEntrada(true);
+        //gestorArchivosBE.setPath(f.getCurrentDirectory());
+        //Lo de abajo imprime el path junto con el archivo
+        //System.out.println(f.getSelectedFile());
+
+*/
+    }//GEN-LAST:event_btnRutaYAbrirActionPerformed
 
     private void btnEscogerPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscogerPathActionPerformed
         // TODO add your handling code here:
@@ -144,8 +167,9 @@ public class GestorArchivoFE extends javax.swing.JPanel {
         //File h = new File("" + f.getCurrentDirectory() + "");
         File h = new File("" + f.getSelectedFile() + "");
         
-        gestorArchivosBE.setFile(h);
-        gestorArchivosBE.setPathDefinido(true);
+        gestorArchivosBE.setFileSalida(h);
+        gestorArchivosBE.setPathDefinidoSalida(true);
+        
         // gestorArchivosBE.setPathSalida(f.getCurrentDirectory());
             
             //System.out.println(f.getSelectedFile());
@@ -157,21 +181,24 @@ public class GestorArchivoFE extends javax.swing.JPanel {
 
     private void btnIngresarProcesamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarProcesamientoActionPerformed
         // TODO add your handling code here:
+        
         if (!valorProcesamiento.getText().isEmpty()) {
             System.out.println("Tiempo de procesamiento: " + valorProcesamiento.getText());
         } else {
             txtLog.setText("No hay ningún valor de procesamiento ingresado, ingrese un valor de válido!");
         }
         
+        
     }//GEN-LAST:event_btnIngresarProcesamientoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAbrirArchivo;
     private javax.swing.JButton btnEscogerPath;
     private javax.swing.JButton btnIngresarProcesamiento;
+    private javax.swing.JButton btnRutaYAbrir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel txtLog;
+    private javax.swing.JLabel txtNoSolicitud;
     private javax.swing.JLabel txtProcesamiento;
     private javax.swing.JTextField valorProcesamiento;
     // End of variables declaration//GEN-END:variables
