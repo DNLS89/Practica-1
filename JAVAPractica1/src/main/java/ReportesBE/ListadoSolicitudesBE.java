@@ -39,13 +39,14 @@ public class ListadoSolicitudesBE extends Reporte {
     private java.sql.Date fechaFinalSQL;
 
     private boolean ejecucionGUI = false;
-    private String comandoListadoTarjetas = "SELECT numero_tarjeta, fecha_ultima_modificacion, tipo, nombre, "
-            + "salario, direccion, estado FROM usuario u, tarjeta t WHERE (u.id_usuario = t.numero_solicitud)";
+    private String comandoSolicitudTarjetas;
 
     public ListadoSolicitudesBE(SQL sql, String numeroTarjeta, boolean filtrarTipoTarjeta, String tipoTarjeta,
             boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarEstado, String estadoTarjeta,
             boolean filtrarFecha, String fechaInicial, String fechaFinal, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE) {
 
+        comandoSolicitudTarjetas = "SELECT numero_tarjeta, fecha_ultima_modificacion, tipo, nombre, "
+            + "salario, direccion, estado FROM usuario u, tarjeta t WHERE (u.id_usuario = t.numero_solicitud)";
         this.sql = sql;
         this.connection = sql.getConnection();
         this.filtrarTipoTarjeta = filtrarTipoTarjeta;
@@ -68,6 +69,8 @@ public class ListadoSolicitudesBE extends Reporte {
             String estadoTarjeta, boolean filtrarFecha, String fechaInicial, String fechaFinal,
             boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE, JTable tabla) {
 
+        comandoSolicitudTarjetas = "SELECT numero_tarjeta, fecha_ultima_modificacion, tipo, nombre, "
+            + "salario, direccion, estado FROM usuario u, tarjeta t WHERE (u.id_usuario = t.numero_solicitud)";
         this.sql = sql;
         this.connection = sql.getConnection();
         this.filtrarTipoTarjeta = filtrarTipoTarjeta;
@@ -88,8 +91,12 @@ public class ListadoSolicitudesBE extends Reporte {
 
     @Override
     public void procesar() {
-        formatoFechaInicialAdecuado();
-        formatoFechaFinalAdecuado();
+
+        if (filtrarFecha) {
+            formatoFechaInicialAdecuado();
+            formatoFechaFinalAdecuado();
+        }
+
         crearComandoParaFiltrar();
         if (ejecucionGUI) {
             extraerDatosTabla();
@@ -100,34 +107,34 @@ public class ListadoSolicitudesBE extends Reporte {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-    
+
     public void formatoFechaInicialAdecuado() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
-        
+
         try {
             fechaInicial = fechaInicial.replace("/", "-");
             date = dateFormat.parse(fechaInicial);
             fechaInicialSQL = new java.sql.Date(date.getTime());
-            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+            filtrarFecha = false;
         }
     }
-    
+
     public void formatoFechaFinalAdecuado() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date;
-        
+
         try {
             fechaFinal = fechaFinal.replace("/", "-");
             date = dateFormat.parse(fechaFinal);
             fechaFinalSQL = new java.sql.Date(date.getTime());
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+            filtrarFecha = false;
         }
     }
 
@@ -137,7 +144,8 @@ public class ListadoSolicitudesBE extends Reporte {
 
         try {
             Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(comandoListadoTarjetas);
+            ResultSet resultSet = statementInsert.executeQuery(comandoSolicitudTarjetas);
+            System.out.println("Comando: " + comandoSolicitudTarjetas);
             //Existe el numero de tarjeta
             while (resultSet.next()) {
                 String numeroTarjeta = resultSet.getString("numero_tarjeta");
@@ -148,7 +156,7 @@ public class ListadoSolicitudesBE extends Reporte {
                 String direccionUsuario = resultSet.getString("direccion");
                 String estadoTarjeta = resultSet.getString("estado");
 
-                tableModel.addRow(new Object[]{numeroTarjeta, fechaUltMod, tipoTarjeta2, 
+                tableModel.addRow(new Object[]{numeroTarjeta, fechaUltMod, tipoTarjeta2,
                     nombreUsuario, salario, direccionUsuario, estadoTarjeta});
 
             }
@@ -185,7 +193,7 @@ public class ListadoSolicitudesBE extends Reporte {
             bw.write("</tr>");
 
             Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(comandoListadoTarjetas);
+            ResultSet resultSet = statementInsert.executeQuery(comandoSolicitudTarjetas);
             //Existe el numero de tarjeta
             while (resultSet.next()) {
                 String numeroTarjeta = resultSet.getString("numero_tarjeta");
@@ -223,17 +231,17 @@ public class ListadoSolicitudesBE extends Reporte {
     public void crearComandoParaFiltrar() {
 
         if (filtrarTipoTarjeta) {
-            comandoListadoTarjetas += " AND (tipo = \"" + tipoTarjeta + "\")";
+            comandoSolicitudTarjetas += " AND (tipo = \"" + tipoTarjeta + "\")";
         }
         if (filtrarSaldoMayorA) {
-            comandoListadoTarjetas += " AND (saldo > " + saldoMayorA + ")";
+            comandoSolicitudTarjetas += " AND (saldo > " + saldoMayorA + ")";
         }
         if (filtrarEstado) {
-            comandoListadoTarjetas += " AND (estado = \"" + estadoTarjeta + "\")";
+            comandoSolicitudTarjetas += " AND (estado = \"" + estadoTarjeta + "\")";
         }
         if (filtrarFecha) {
-            comandoListadoTarjetas += " AND (fecha_ultima_modificacion BETWEEN '" + fechaInicialSQL + "' AND '" + fechaFinalSQL +"')";
+            comandoSolicitudTarjetas += " AND (fecha_ultima_modificacion BETWEEN '" + fechaInicialSQL + "' AND '" + fechaFinalSQL + "')";
         }
-        //System.out.println("COmando creado: " + comandoListadoTarjetas);
+        //System.out.println("COmando creado: " + comandoSolicitudTarjetas);
     }
 }

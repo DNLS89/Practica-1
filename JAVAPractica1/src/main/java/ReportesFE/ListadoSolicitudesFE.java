@@ -235,11 +235,15 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
         } else if (txtTipoTarjeta.getSelectedIndex() == 3) {
             tipoTarjeta = "INTERNACIONAL";
             filtrarTipoTarjeta = true;
+        } else {
+            filtrarTipoTarjeta = false;
         }
         
         if (!txtSaldoMayorA.getText().isBlank()) {
             saldoMayorA = Integer.valueOf(txtSaldoMayorA.getText());
             filtrarSaldoMayorA = true;
+        } else {
+            filtrarSaldoMayorA = false;
         }
         
         //Tipo
@@ -252,17 +256,18 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
         } else if (txtEstadoTarjeta.getSelectedIndex() == 3) {
             estadoTarjeta = "CANCELADA";
             filtrarEstado = true;
+        } else {
+            filtrarEstado = false;
         }
         
         //Filtrar fecha, en base a si se puede convertir o no al formato adecuado
-        if (!txtFechaInicial.getText().isBlank()) {
-            fechaInicial = txtFechaInicial.getText();
-            filtrarFecha = true;
-        }
         
-        if (!txtFechaFinal.getText().isBlank()) {
+        if (!txtFechaInicial.getText().equals("dd/mm/aaaa") && !txtFechaFinal.getText().equals("dd/mm/aaaa")) {
+            fechaInicial = txtFechaInicial.getText();
             fechaFinal = txtFechaFinal.getText();
             filtrarFecha = true;
+        } else {
+            filtrarFecha = false;
         }
         
     }

@@ -138,7 +138,6 @@ public class AutorizacionBE extends Tramite {
     }
     
     public void cambiarNumeroTarjeta(String tipoTarjeta) {
-        
         //Verifica que haya un valor asignado a tarjetas del mismo tipo, si no eixste lo asigna, 
         //si existe encuentra el numero más grande según tipo de tarjeta (nacional, regional, internacional) 
         try {

@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,98 +21,152 @@ public class ListadoTarjetasBE extends Reporte {
 
     private SQL sql;
     private Connection connection;
-    private String numeroTarjeta;
     private JTable tabla;
     private GestorArchivoBE gestorArchivoBE;
 
     //Variables para filtrar
-    //4 datos que filtran no. tarjeta, tipo, saldos mayores a, interés mayor a
     private boolean filtrarTipoTarjeta;
     private String tipoTarjeta;
-    private boolean filtrarSaldoMayorA;
-    private int saldoMayorA;
-    private boolean filtrarInteresMayorA;
-    private int interesMayorA;
+//    private boolean filtrarSaldoMayorA;
+//    private int saldoMayorA;
+    private boolean filtrarNombre;
+    private String nombre;
+
+    private boolean filtrarEstado;
+    private String estadoTarjeta;
+    private boolean filtrarFecha;
+    private String fechaInicial;
+    private java.sql.Date fechaInicialSQL;
+    private String fechaFinal;
+    private java.sql.Date fechaFinalSQL;
+
     private boolean ejecucionGUI = false;
-    private String comandoEstadoCuenta = "SELECT numero_tarjeta, tipo, nombre, direccion, tipoMov, fecha_movimiento, "
-            + "descripcion_movimiento, establecimiento_movimiento, monto, interes, saldo FROM usuario u, "
-            + "movimiento m, tarjeta t WHERE (u.id_usuario = m.id_usuario AND m.numero_solicitud = t.numero_solicitud)";
+    private String comandoListadoTarjetas;
 
     public ListadoTarjetasBE(SQL sql, String numeroTarjeta, boolean filtrarTipoTarjeta, String tipoTarjeta,
-            boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarInteresMayorA,
-            int interesMayorA, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE) {
+            boolean filtrarNombre, String nombre, boolean filtrarEstado, String estadoTarjeta,
+            boolean filtrarFecha, String fechaInicial, String fechaFinal, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE) {
 
+        comandoListadoTarjetas = "SELECT numero_solicitud, numero_tarjeta, tipo, "
+            + "limite, nombre, direccion, fecha_ultima_modificacion, estado FROM usuario u, "
+            + "tarjeta t WHERE (u.id_usuario = t.numero_solicitud) AND (numero_tarjeta != \"\")";
         this.sql = sql;
         this.connection = sql.getConnection();
-        this.numeroTarjeta = numeroTarjeta;
         this.filtrarTipoTarjeta = filtrarTipoTarjeta;
         this.tipoTarjeta = tipoTarjeta;
-        this.filtrarSaldoMayorA = filtrarSaldoMayorA;
-        this.saldoMayorA = saldoMayorA;
-        this.filtrarInteresMayorA = filtrarInteresMayorA;
-        this.interesMayorA = interesMayorA;
+        this.filtrarNombre = filtrarNombre;
+        this.nombre = nombre;
+//        this.filtrarSaldoMayorA = filtrarSaldoMayorA;
+//        this.saldoMayorA = saldoMayorA;
+
+        this.filtrarEstado = filtrarEstado;
+        this.estadoTarjeta = estadoTarjeta;
+        this.filtrarFecha = filtrarFecha;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+
         this.ejecucionGUI = ejecucionGUI;
         this.gestorArchivoBE = gestorArchivoBE;
     }
 
-    public ListadoTarjetasBE(SQL sql, String numeroTarjeta, boolean filtrarTipoTarjeta, String tipoTarjeta,
-            boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarInteresMayorA,
-            int interesMayorA, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE, JTable tabla) {
+    public ListadoTarjetasBE(SQL sql, boolean filtrarTipoTarjeta, String tipoTarjeta,
+            boolean filtrarNombre, String nombre, boolean filtrarEstado,
+            String estadoTarjeta, boolean filtrarFecha, String fechaInicial, String fechaFinal,
+            boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE, JTable tabla) {
 
+        comandoListadoTarjetas = "SELECT numero_solicitud, numero_tarjeta, tipo, "
+            + "limite, nombre, direccion, fecha_ultima_modificacion, estado FROM usuario u, "
+            + "tarjeta t WHERE (u.id_usuario = t.numero_solicitud) AND (numero_tarjeta != \"\")";
         this.sql = sql;
         this.connection = sql.getConnection();
-        this.numeroTarjeta = numeroTarjeta;
         this.filtrarTipoTarjeta = filtrarTipoTarjeta;
         this.tipoTarjeta = tipoTarjeta;
-        this.filtrarSaldoMayorA = filtrarSaldoMayorA;
-        this.saldoMayorA = saldoMayorA;
-        this.filtrarInteresMayorA = filtrarInteresMayorA;
-        this.interesMayorA = interesMayorA;
+        this.filtrarNombre = filtrarNombre;
+        this.nombre = nombre;
+//        this.filtrarSaldoMayorA = filtrarSaldoMayorA;
+//        this.saldoMayorA = saldoMayorA;
+
+        this.filtrarEstado = filtrarEstado;
+        this.estadoTarjeta = estadoTarjeta;
+        this.filtrarFecha = filtrarFecha;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+
         this.ejecucionGUI = ejecucionGUI;
-        this.tabla = tabla;
         this.gestorArchivoBE = gestorArchivoBE;
+        this.tabla = tabla;
     }
 
     @Override
     public void procesar() {
-
-        if (comprobarTarjetaExiste()) {
-            crearComandoParaFiltrar();
-            if (ejecucionGUI) {
-                extraerDatosTabla();
-            }
-            //Generar HTML
-            try {
-                generarHTML();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+        if (filtrarFecha) {
+            formatoFechaInicialAdecuado();
+            formatoFechaFinalAdecuado();
+        }
+        
+        crearComandoParaFiltrar();
+        if (ejecucionGUI) {
+            extraerDatosTabla();
+        }
+        //Generar HTML
+        try {
+            generarHTML();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+    }
+    
+    public void formatoFechaInicialAdecuado() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        
+        try {
+            fechaInicial = fechaInicial.replace("/", "-");
+            date = dateFormat.parse(fechaInicial);
+            fechaInicialSQL = new java.sql.Date(date.getTime());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+            filtrarFecha = false;
+        }
+    }
+    
+    public void formatoFechaFinalAdecuado() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        
+        try {
+            fechaFinal = fechaFinal.replace("/", "-");
+            date = dateFormat.parse(fechaFinal);
+            fechaFinalSQL = new java.sql.Date(date.getTime());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+            filtrarFecha = false;
+        }
     }
 
     public void extraerDatosTabla() {
         DefaultTableModel tableModel = (DefaultTableModel) tabla.getModel();
+        tableModel.setRowCount(0);
 
         try {
             Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(comandoEstadoCuenta);
+            ResultSet resultSet = statementInsert.executeQuery(comandoListadoTarjetas);
             //Existe el numero de tarjeta
             while (resultSet.next()) {
+                //Numero tarjeta, tipo, limite, nombre, direccion, fechamod, estado
+                String numeroTarjeta = resultSet.getString("numero_tarjeta");
                 String tipoTarjeta2 = resultSet.getString("tipo");
+                int limite = resultSet.getInt("limite");
                 String nombreUsuario = resultSet.getString("nombre");
                 String direccionUsuario = resultSet.getString("direccion");
-                String tipoMov = resultSet.getString("tipoMov");
-                String fechaMov = resultSet.getString("fecha_movimiento");
-                String descripcionMov = resultSet.getString("descripcion_movimiento");
-                String establecimientoMov = resultSet.getString("establecimiento_movimiento");
-                int montoMov = resultSet.getInt("monto");
-                double interesesSaldo = resultSet.getDouble("interes");
-                int saldo = resultSet.getInt("saldo");
+                String fechaUltMod = resultSet.getString("fecha_ultima_modificacion");
+                String estadoTarjeta = resultSet.getString("estado");
 
-                tableModel.addRow(new Object[]{numeroTarjeta, tipoTarjeta2, nombreUsuario, direccionUsuario,
-                    tipoMov, fechaMov, descripcionMov, establecimientoMov, montoMov, interesesSaldo, saldo});
+                tableModel.addRow(new Object[]{numeroTarjeta, tipoTarjeta2, limite,
+                    nombreUsuario, direccionUsuario, fechaUltMod, estadoTarjeta});
 
             }
 
@@ -122,11 +179,11 @@ public class ListadoTarjetasBE extends Reporte {
     public void generarHTML() throws IOException {
         File h;
         //No tarjeta, tipo tarjeta, limite, nombre, dirección, estado de tarjeta
-        String html = ("<div><h1>Estado Cuenta Tarjeta \"" + numeroTarjeta + "\" </h1><p></p>");
+        String html = ("<div><h1>Listado Tarjetas</h1><p></p>");
         if (gestorArchivoBE.getPathDefinido()) {
-            h = new File(gestorArchivoBE.getFile().getCanonicalPath() + "/EstadoCuenta.html");
+            h = new File(gestorArchivoBE.getFile().getCanonicalPath() + "/ListadoTarjetas.html");
         } else {
-            h = new File("EstadoCuenta.html");
+            h = new File("ListadoTarjetas.html");
         }
         //File h = new File("Consulta.html"); 
         try {
@@ -136,58 +193,36 @@ public class ListadoTarjetasBE extends Reporte {
             bw.write("<tr bgcolor=\"grey\">");
             bw.write("<th>Número de Tajeta</th>");
             bw.write("<th>Tipo de Tarjeta</th>");
+            bw.write("<th>Límite</th>");
             bw.write("<th>Nombre Usuario</th>");
             bw.write("<th>Dirección Usuario</th>");
-            bw.write("<th>Tipo Movimiento</th>");
-            bw.write("<th>Fecha Movimiento</th>");
-            bw.write("<th>Descripción Movimiento</th>");
-            bw.write("<th>Establecimiento Movimiento</th>");
-            bw.write("<th>Monto Movimiento</th>");
-            bw.write("<th>Intereses</th>");
-            bw.write("<th>Saldo</th>");
-
+            bw.write("<th>Fecha Ult. Mod.</th>");
+            bw.write("<th>Estado Tarjeta</th>");
             bw.write("</tr>");
 
             Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(comandoEstadoCuenta);
+            ResultSet resultSet = statementInsert.executeQuery(comandoListadoTarjetas);
             //Existe el numero de tarjeta
             while (resultSet.next()) {
-                //numeroTarjeta, tipoTarjeta2, nombreUsuario, direccionUsuario, 
-//                    tipoMov, fechaMov, descripcionMov, establecimientoMov, montoMov, interesesSaldo, saldo
-
+                String numeroTarjeta = resultSet.getString("numero_tarjeta");
                 String tipoTarjeta2 = resultSet.getString("tipo");
+                int limite = resultSet.getInt("limite");
                 String nombreUsuario = resultSet.getString("nombre");
                 String direccionUsuario = resultSet.getString("direccion");
-                String tipoMov = resultSet.getString("tipoMov");
-                String fechaMov = resultSet.getString("fecha_movimiento");
-                String descripcionMov = resultSet.getString("descripcion_movimiento");
-                String establecimientoMov = resultSet.getString("establecimiento_movimiento");
-                int montoMov = resultSet.getInt("monto");
-                double interesesSaldo = resultSet.getDouble("interes");
-                int saldo = resultSet.getInt("saldo");
-                
+                String fechaUltMod = resultSet.getString("fecha_ultima_modificacion");
+                String estadoTarjeta = resultSet.getString("estado");
+
                 bw.write("<tr bgcolor=\"lightgrey\" align=\"center\">");
                 bw.write("<td>" + numeroTarjeta + "</td>");
                 bw.write("<td>" + tipoTarjeta2 + "</td>");
+                bw.write("<td>" + limite + "</td>");
                 bw.write("<td>" + nombreUsuario + "</td>");
                 bw.write("<td>" + direccionUsuario + "</td>");
-                bw.write("<td>" + tipoMov + "</td>");
-                bw.write("<td>" + fechaMov + "</td>");
-                bw.write("<td>" + descripcionMov + "</td>");
-                bw.write("<td>" + establecimientoMov + "</td>");
-                bw.write("<td>" + montoMov + "</td>");
-                bw.write("<td>" + interesesSaldo + "</td>");
-                bw.write("<td>" + saldo + "</td>");
+                bw.write("<td>" + fechaUltMod + "</td>");
+                bw.write("<td>" + estadoTarjeta + "</td>");
 
             }
 
-//            bw.write("<tr bgcolor=\"lightgrey\" align=\"center\">");
-//            bw.write("<td>" + numeroTarjeta + "</td>");
-//            bw.write("<td>" + tipoTarjeta + "</td>");
-//            bw.write("<td>" + limiteTarjeta + "</td>");
-//            bw.write("<td>" + estadoTarjeta + "</td>");
-//            bw.write("<td>" + nombreUsuarioTarjeta + "</td>");
-//            bw.write("<td>" + direccionUsuarioTarjeta + "</td>");
             bw.write("</tr>");
 
             bw.write("</table>");
@@ -202,40 +237,19 @@ public class ListadoTarjetasBE extends Reporte {
     }
 
     public void crearComandoParaFiltrar() {
-        comandoEstadoCuenta += " AND (numero_tarjeta = \"" + numeroTarjeta + "\")";
 
         if (filtrarTipoTarjeta) {
-            comandoEstadoCuenta += " AND (tipo = \"" + tipoTarjeta + "\")";
+            comandoListadoTarjetas += " AND (tipo = \"" + tipoTarjeta + "\")";
         }
-        if (filtrarSaldoMayorA) {
-            comandoEstadoCuenta += " AND (saldo > " + saldoMayorA + ")";
+        if (filtrarNombre) {
+            comandoListadoTarjetas += " AND (nombre = '" + nombre + "')";
         }
-        if (filtrarInteresMayorA) {
-            comandoEstadoCuenta += " AND (interes > " + interesMayorA + ")";
+        if (filtrarEstado) {
+            comandoListadoTarjetas += " AND (estado = \"" + estadoTarjeta + "\")";
         }
-        System.out.println("COmando creado: " + comandoEstadoCuenta);
-    }
-
-    public boolean comprobarTarjetaExiste() {
-        String comandoTarjeta = "SELECT * FROM tarjeta WHERE numero_tarjeta like \"" + numeroTarjeta + "\"";
-
-        try {
-            Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(comandoTarjeta);
-            //Existe el numero de tarjeta
-            if (resultSet.next()) {
-                //Existe el número de tarjeta
-                return true;
-
-            } else {
-                //No existe el número de tarjeta
-                JOptionPane.showMessageDialog(null, "El número de tarjeta no existe o el formato es erróneo", "", JOptionPane.PLAIN_MESSAGE);
-                return false;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (filtrarFecha) {
+            comandoListadoTarjetas += " AND (fecha_ultima_modificacion BETWEEN '" + fechaInicialSQL + "' AND '" + fechaFinalSQL +"')";
         }
-        return false;
+        //System.out.println("COmando creado: " + comandoListadoTarjetas);
     }
 }
