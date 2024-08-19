@@ -120,7 +120,6 @@ public class AutorizacionBE extends Tramite {
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //this.fechaCreacion = dateFormat.format(thisDate);
         //Date date = dateFormat.parse(fechaCreacion);
-        System.out.println("Cambiando fecha");
         //Los ingresa a la base de datos
         try {
             String comandoIngresarFechaCreacion = "UPDATE tarjeta set fecha_creacion = " + "\"" + sqlDate + "\"" 

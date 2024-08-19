@@ -66,7 +66,7 @@ public class ListadoTarjetasFE extends javax.swing.JPanel {
 
         jPanel1.setPreferredSize(new java.awt.Dimension(980, 446));
 
-        jLabel1.setText("Listado Solicitudes");
+        jLabel1.setText("Listado Tarjetas");
 
         jLabel2.setText("Estado");
 

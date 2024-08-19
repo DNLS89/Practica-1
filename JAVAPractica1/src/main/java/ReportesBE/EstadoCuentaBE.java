@@ -187,13 +187,6 @@ public class EstadoCuentaBE extends Reporte {
 
             }
 
-//            bw.write("<tr bgcolor=\"lightgrey\" align=\"center\">");
-//            bw.write("<td>" + numeroTarjeta + "</td>");
-//            bw.write("<td>" + tipoTarjeta + "</td>");
-//            bw.write("<td>" + limiteTarjeta + "</td>");
-//            bw.write("<td>" + estadoTarjeta + "</td>");
-//            bw.write("<td>" + nombreUsuarioTarjeta + "</td>");
-//            bw.write("<td>" + direccionUsuarioTarjeta + "</td>");
             bw.write("</tr>");
 
             bw.write("</table>");
