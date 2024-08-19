@@ -11,14 +11,13 @@ import SQL.SQL;
  *
  * @author debian
  */
-public class ListadoTarjetasFE extends javax.swing.JPanel {
+public class ListadoSolicitudesFE extends javax.swing.JPanel {
     private SQL sql;
     private GestorArchivoBE gestorArchivosBE;
-
     /**
      * Creates new form EstadoCuentaFE
      */
-    public ListadoTarjetasFE(SQL sql, GestorArchivoBE gestorArchivoBE) {
+    public ListadoSolicitudesFE(SQL sql, GestorArchivoBE gestorArchivoBE) {
         this.sql = sql;
         this.gestorArchivosBE = gestorArchivoBE;
         initComponents();
@@ -36,25 +35,23 @@ public class ListadoTarjetasFE extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(980, 440));
-
-        jLabel1.setText("Listado Tarjetas");
+        jLabel1.setText("Listado Solicitudes");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(438, 438, 438)
+                .addGap(425, 425, 425)
                 .addComponent(jLabel1)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

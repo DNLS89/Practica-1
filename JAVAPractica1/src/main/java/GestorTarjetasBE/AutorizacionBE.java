@@ -29,8 +29,8 @@ public class AutorizacionBE extends Tramite {
     private String fechaCreacion;
     
     private final String valorInicialNacional = "4256 3102 6540 0000";
-    private final String valorInicialRegional = "4256 3102 6540 0000";
-    private final String valorInicialInternacional = "4256 3102 6540 0000";
+    private final String valorInicialRegional = "4256 3102 6560 0000";
+    private final String valorInicialInternacional = "4256 3102 6580 0000";
 
     public AutorizacionBE(SQL sql, int numeroSolicitud) {
         this.sql = sql;
@@ -178,6 +178,7 @@ public class AutorizacionBE extends Tramite {
             }
             
         } catch (Exception e) {
+            System.out.println("Error cambiando numero de tarjeta");
             e.printStackTrace();
         }
     }

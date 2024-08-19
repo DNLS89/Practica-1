@@ -27,6 +27,12 @@ public class MovimientoBE extends Tramite{
     private BigDecimal monto;
     private BigDecimal saldoTarjeta;
     private BigDecimal limiteTarjeta;
+    private String tipoMovmiento;
+    private String tipoTarjeta;
+    private BigDecimal interes;
+    private final BigDecimal interesNacional = new BigDecimal("0.012");
+    private final BigDecimal interesRegional = new BigDecimal("0.023");
+    private final BigDecimal interesInternacional = new BigDecimal("0.0375");
     
 
     public MovimientoBE(SQL sql, int indiceTipoMovimiento, String fechaMov, String numeroTarjeta, String establecimientoMov, 
@@ -47,21 +53,48 @@ public class MovimientoBE extends Tramite{
             extraerSaldo();
             if (indiceTipoMovimiento == 0) {
                 //CARGO  GASTAR
+                tipoMovmiento = "CARGO";
                 if (saldoDisponible()) {
                     cargoTarjeta();
                 }
             } else {
                 //ABONO   AGREGAR
+                tipoMovmiento = "ABONO";
                 abonarTarjeta();
             }
             
             try {
+                procesarInteres();
                 crearRelacionMovimiento();
             } catch (ParseException ex) {
                 System.out.println("Error creando relacion");
                 Logger.getLogger(MovimientoBE.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(null, "Movimiento Realizado Exitosamente", "Proceso Realizado", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    public void procesarInteres() {
+        //No puede superar el limite, si lo supera no se procesa el 
+        //Extraer el valor que haya en saldo
+        String selectTarjetaMovimiento = "SELECT * FROM tarjeta WHERE numero_tarjeta like \"" + numeroTarjeta + "\"";
+        
+        try {
+            //Extrae el valor del saldo
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(selectTarjetaMovimiento);
+            if (resultSet.next()) {
+                tipoTarjeta = resultSet.getString("tipo");
+                
+                if (tipoTarjeta.equals("NACIONAL")) {
+                    interes = saldoTarjeta.add(monto).multiply(interesNacional);
+                } else if (tipoTarjeta.equals("REGIONAL")) {
+                    interes = saldoTarjeta.add(monto).multiply(interesRegional);
+                } else if (tipoTarjeta.equals("INTERNACIONAL")) {
+                    interes = saldoTarjeta.add(monto).multiply(interesInternacional);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
@@ -96,8 +129,10 @@ public class MovimientoBE extends Tramite{
                 numeroSolicitud = idUsuario; 
             }
            //Ingresa los datos a la tabla de RELACION MOVIMIENTO
-           String comandoCrearRelacion = "INSERT INTO movimiento (id_usuario, numero_solicitud, fecha_movimiento, descripcion_movimiento, establecimiento_movimiento) "
-                + "VALUE ('" + idUsuario + "', '" + numeroSolicitud + "','" + fechaFormatoSQL + "','" + descripcionMov + "','" + establecimientoMov + "');";
+           String comandoCrearRelacion = "INSERT INTO movimiento (id_usuario, numero_solicitud, fecha_movimiento,"
+                   + " descripcion_movimiento, establecimiento_movimiento, monto, tipoMov, interes) " + "VALUE ('" + idUsuario + "', '"
+                   + "" + numeroSolicitud + "','" + fechaFormatoSQL + "','" + descripcionMov + "','" + establecimientoMov + "', '"
+                   + "" + monto + "', '" + tipoMovmiento + "', '" + interes + "');";
             statementInsert = connection.createStatement();
             statementInsert.executeUpdate(comandoCrearRelacion);
         } catch (Exception e) {

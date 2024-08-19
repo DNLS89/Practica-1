@@ -66,8 +66,11 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnEstadoCuenta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ver Estado de Cuenta"/>
+            <Property name="text" type="java.lang.String" value="Estado de Cuenta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoCuentaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnListadoTarjetas">
           <Properties>

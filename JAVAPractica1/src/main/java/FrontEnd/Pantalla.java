@@ -45,9 +45,9 @@ public class Pantalla extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         contenido = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGestorArchivos = new javax.swing.JButton();
+        btnGestorTarjeta = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,24 +64,24 @@ public class Pantalla extends javax.swing.JFrame {
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Gestor Archivos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGestorArchivos.setText("Gestor Archivos");
+        btnGestorArchivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGestorArchivosActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Gestor Tarjeta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnGestorTarjeta.setText("Gestor Tarjeta");
+        btnGestorTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnGestorTarjetaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Reportes");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnReportes.setText("Reportes");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnReportesActionPerformed(evt);
             }
         });
 
@@ -92,11 +92,11 @@ public class Pantalla extends javax.swing.JFrame {
             .addComponent(contenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addComponent(jButton1)
+                .addComponent(btnGestorArchivos)
                 .addGap(176, 176, 176)
-                .addComponent(jButton2)
+                .addComponent(btnGestorTarjeta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnReportes)
                 .addGap(162, 162, 162))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,9 +104,9 @@ public class Pantalla extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnGestorArchivos)
+                    .addComponent(btnGestorTarjeta)
+                    .addComponent(btnReportes))
                 .addGap(35, 35, 35)
                 .addComponent(contenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -126,30 +126,30 @@ public class Pantalla extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnGestorArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorArchivosActionPerformed
         // TODO add your handling code here:
         GestorArchivoFE gestorArchivosFE = new GestorArchivoFE(gestorArchivosBE);
         showPanel(gestorArchivosFE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGestorArchivosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnGestorTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorTarjetaActionPerformed
         // TODO add your handling code here:
         GestorTarjetaFE gestorTarjetaFE = new GestorTarjetaFE(sql, gestorArchivosBE);
         showPanel(gestorTarjetaFE);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnGestorTarjetaActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         // TODO add your handling code here:
-        ReportesFE reportesFE = new ReportesFE();
+        ReportesFE reportesFE = new ReportesFE(sql, gestorArchivosBE);
         showPanel(reportesFE);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnReportesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGestorArchivos;
+    private javax.swing.JButton btnGestorTarjeta;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JPanel contenido;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

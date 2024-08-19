@@ -1,11 +1,18 @@
 package ReportesFE;
 
+import GestorArchivo.GestorArchivoBE;
+import SQL.SQL;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 public class ReportesFE extends javax.swing.JPanel {
 
-    public ReportesFE() {
+    private SQL sql;
+    private GestorArchivoBE gestorArchivosBE;
+    
+    public ReportesFE(SQL sql, GestorArchivoBE gestorArchivosBE) {
+        this.sql = sql;
+        this.gestorArchivosBE = gestorArchivosBE;
         initComponents();
     }
     
@@ -34,7 +41,12 @@ public class ReportesFE extends javax.swing.JPanel {
         btnListadoSolicitudes = new javax.swing.JButton();
         contenidoReportes = new javax.swing.JPanel();
 
-        btnEstadoCuenta.setText("Ver Estado de Cuenta");
+        btnEstadoCuenta.setText("Estado de Cuenta");
+        btnEstadoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadoCuentaActionPerformed(evt);
+            }
+        });
 
         btnListadoTarjetas.setText("Listado de Tarjetas");
         btnListadoTarjetas.addActionListener(new java.awt.event.ActionListener() {
@@ -107,11 +119,21 @@ public class ReportesFE extends javax.swing.JPanel {
 
     private void btnListadoSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListadoSolicitudesActionPerformed
         // TODO add your handling code here:
+        ListadoSolicitudesFE listadoSolicitudesFE = new ListadoSolicitudesFE(sql, gestorArchivosBE);
+        showPanel(listadoSolicitudesFE);
     }//GEN-LAST:event_btnListadoSolicitudesActionPerformed
 
     private void btnListadoTarjetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListadoTarjetasActionPerformed
         // TODO add your handling code here:
+        ListadoTarjetasFE listadoTarjetasFE = new ListadoTarjetasFE(sql, gestorArchivosBE);
+        showPanel(listadoTarjetasFE);
     }//GEN-LAST:event_btnListadoTarjetasActionPerformed
+
+    private void btnEstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoCuentaActionPerformed
+        // TODO add your handling code here:
+        EstadoCuentaFE estadoCuentaFE = new EstadoCuentaFE(sql, gestorArchivosBE);
+        showPanel(estadoCuentaFE);
+    }//GEN-LAST:event_btnEstadoCuentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

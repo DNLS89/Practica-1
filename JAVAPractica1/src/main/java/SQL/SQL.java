@@ -12,7 +12,8 @@ import java.util.logging.Logger;
 
 public class SQL {
     //private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/CONTROL_TARJETAS";
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/PRUEBA";
+    //private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/PRUEBA";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/PRUEBA2";
     //Ahora especificamos el usuario y la contrase!na que usa MYSQL
     private static final String USER = "root";
     private static final String PASSWORD = "123";
@@ -28,11 +29,11 @@ public class SQL {
     
     public void establecerConexion() {
         try {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                Class.forName("com.mysql.jdbc.Driver");
+//            } catch (ClassNotFoundException ex) {
+//                Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
             
         } catch (SQLException e) {
