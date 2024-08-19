@@ -230,7 +230,7 @@ public class ListadoTarjetasBE extends Reporte {
             bw.write("</br>");
 
             bw.close();
-            JOptionPane.showMessageDialog(null, "HTML Realizado Exitosamente", "Consulta Realizada", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "HTML creado", "Consulta Realizada", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         }

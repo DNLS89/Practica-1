@@ -31,14 +31,16 @@ public class EstadoCuentaBE extends Reporte {
     private boolean filtrarInteresMayorA;
     private int interesMayorA;
     private boolean ejecucionGUI = false;
-    private String comandoEstadoCuenta = "SELECT numero_tarjeta, tipo, nombre, direccion, tipoMov, fecha_movimiento, "
-            + "descripcion_movimiento, establecimiento_movimiento, monto, interes, saldo FROM usuario u, "
-            + "movimiento m, tarjeta t WHERE (u.id_usuario = m.id_usuario AND m.numero_solicitud = t.numero_solicitud)";
+    private String comandoEstadoCuenta;
 
     public EstadoCuentaBE(SQL sql, String numeroTarjeta, boolean filtrarTipoTarjeta, String tipoTarjeta,
             boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarInteresMayorA,
             int interesMayorA, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE) {
 
+        
+       comandoEstadoCuenta = "SELECT numero_tarjeta, tipo, nombre, direccion, tipoMov, fecha_movimiento, "
+            + "descripcion_movimiento, establecimiento_movimiento, monto, interes, saldo FROM usuario u, "
+            + "movimiento m, tarjeta t WHERE (u.id_usuario = m.id_usuario AND m.numero_solicitud = t.numero_solicitud)";
         this.sql = sql;
         this.connection = sql.getConnection();
         this.numeroTarjeta = numeroTarjeta;
@@ -56,6 +58,9 @@ public class EstadoCuentaBE extends Reporte {
             boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarInteresMayorA,
             int interesMayorA, boolean ejecucionGUI, GestorArchivoBE gestorArchivoBE, JTable tabla) {
 
+        comandoEstadoCuenta = "SELECT numero_tarjeta, tipo, nombre, direccion, tipoMov, fecha_movimiento, "
+            + "descripcion_movimiento, establecimiento_movimiento, monto, interes, saldo FROM usuario u, "
+            + "movimiento m, tarjeta t WHERE (u.id_usuario = m.id_usuario AND m.numero_solicitud = t.numero_solicitud)";
         this.sql = sql;
         this.connection = sql.getConnection();
         this.numeroTarjeta = numeroTarjeta;
@@ -196,7 +201,7 @@ public class EstadoCuentaBE extends Reporte {
             bw.write("</br>");
 
             bw.close();
-            JOptionPane.showMessageDialog(null, "HTML Realizado Exitosamente", "Consulta Realizada", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, "HTML creado", "Consulta Realizada", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
         }

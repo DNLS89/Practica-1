@@ -218,18 +218,25 @@ public class EstadoCuentaFE extends javax.swing.JPanel {
             filtrarTipoTarjeta = true;
         } else if (txtTipoTarjeta.getSelectedIndex() == 2) {
             tipoTarjeta = "REGIONAL";
+            filtrarTipoTarjeta = true;
         } else if (txtTipoTarjeta.getSelectedIndex() == 3) {
             tipoTarjeta = "INTERNACIONAL";
+            filtrarTipoTarjeta = true;
         } else {
+            filtrarTipoTarjeta = false;
         }
         if (!txtSaldoMayorA.getText().isBlank()) {
             saldoMayorA = Integer.valueOf(txtSaldoMayorA.getText());
             filtrarSaldoMayorA = true;
+        } else {
+            filtrarSaldoMayorA =  false;
         }
         
         if (!txtInteresMayorA.getText().isBlank()) {
             interesMayorA = Integer.valueOf(txtInteresMayorA.getText());
             filtrarInteresMayorA = true;
+        } else {
+            filtrarInteresMayorA = false;
         }
     }
     
