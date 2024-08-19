@@ -91,6 +91,7 @@ public class EstadoCuentaBE extends Reporte {
 
     public void extraerDatosTabla() {
         DefaultTableModel tableModel = (DefaultTableModel) tabla.getModel();
+        tableModel.setRowCount(0);
 
         try {
             Statement statementInsert = connection.createStatement();

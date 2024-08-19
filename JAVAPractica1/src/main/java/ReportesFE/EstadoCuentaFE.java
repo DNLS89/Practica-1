@@ -62,6 +62,11 @@ public class EstadoCuentaFE extends javax.swing.JPanel {
 
         jLabel2.setText("Número Tarjeta:");
 
+        txtNumeroTarjeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroTarjetaActionPerformed(evt);
+            }
+        });
         txtNumeroTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroTarjetaKeyTyped(evt);
@@ -254,6 +259,10 @@ public class EstadoCuentaFE extends javax.swing.JPanel {
             evt.consume();
         }
     }//GEN-LAST:event_txtNumeroTarjetaKeyTyped
+
+    private void txtNumeroTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroTarjetaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroTarjetaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

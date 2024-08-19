@@ -89,7 +89,7 @@ public class CancelacionBE extends Tramite{
         if (comprobarCumpleEstado() && comprobarCumpleSaldoPendiente()) {
             cambiarEstadoTarjeta();
             try {
-                agregarFechaCancelacion();
+                agregarFechasCancelacionYModificacion();
             } catch (ParseException ex) {
                 Logger.getLogger(CancelacionBE.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -138,7 +138,7 @@ public class CancelacionBE extends Tramite{
         }
     }
     
-    public void agregarFechaCancelacion() throws ParseException {
+    public void agregarFechasCancelacionYModificacion() throws ParseException {
         Date thisDate = new Date();
         java.sql.Date sqlDate = new java.sql.Date(thisDate.getTime());
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -149,6 +149,10 @@ public class CancelacionBE extends Tramite{
             String comandoIngresarFechaCreacion = "UPDATE tarjeta set fecha_cancelacion = " + "\"" + sqlDate + "\""
                     + " WHERE numero_tarjeta = " + "\"" + numeroTarjetaCancelar + "\"" + " ";
             Statement statementInsert = connection.createStatement();
+            statementInsert.executeUpdate(comandoIngresarFechaCreacion);
+            
+            comandoIngresarFechaCreacion = "UPDATE tarjeta set fecha_ultima_modificacion = " + "\"" + sqlDate + "\""
+                    + " WHERE numero_tarjeta = " + "\"" + numeroTarjetaCancelar + "\"" + " ";
             statementInsert.executeUpdate(comandoIngresarFechaCreacion);
 
         } catch (Exception e) {

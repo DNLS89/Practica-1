@@ -5,6 +5,7 @@
 package ReportesFE;
 
 import GestorArchivo.GestorArchivoBE;
+import ReportesBE.ListadoSolicitudesBE;
 import SQL.SQL;
 
 /**
@@ -14,6 +15,18 @@ import SQL.SQL;
 public class ListadoSolicitudesFE extends javax.swing.JPanel {
     private SQL sql;
     private GestorArchivoBE gestorArchivosBE;
+    
+    private boolean filtrarTipoTarjeta = false;
+    private String tipoTarjeta;
+    private boolean filtrarSaldoMayorA = false;
+    private int saldoMayorA = 0;
+    private boolean filtrarEstado = false;
+    private String estadoTarjeta;
+    private boolean filtrarFecha = false;
+    private String fechaInicial = "";
+    private String fechaFinal = "";
+    
+    
     /**
      * Creates new form EstadoCuentaFE
      */
@@ -34,33 +47,143 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtTipoTarjeta = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtSaldoMayorA = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtFechaInicial = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        btnFiltrar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtFechaFinal = new javax.swing.JTextField();
+        txtEstadoTarjeta = new javax.swing.JComboBox<>();
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(980, 446));
 
         jLabel1.setText("Listado Solicitudes");
+
+        jLabel2.setText("Estado");
+
+        jLabel3.setText("Tipo:");
+
+        txtTipoTarjeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "NACIONAL", "REGIONAL", "INTERNACIONAL" }));
+
+        jLabel4.setText("Saldo mayor a:");
+
+        txtSaldoMayorA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSaldoMayorAActionPerformed(evt);
+            }
+        });
+        txtSaldoMayorA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSaldoMayorAKeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("Fecha de ");
+
+        txtFechaInicial.setText("dd/mm/aaaa");
+        txtFechaInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFechaInicialKeyTyped(evt);
+            }
+        });
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No. Tarjeta", "Fecha Ult. Mod.", "Tipo", "Nombre", "Salario", "Direccion", "Estado"
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("a");
+
+        txtFechaFinal.setText("dd/mm/aaaa");
+
+        txtEstadoTarjeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--", "TRAMITE", "ACTIVA", "CANCELADA" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(425, 425, 425)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addGap(433, 433, 433))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(442, 442, 442)
+                        .addComponent(btnFiltrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel2)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtEstadoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTipoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSaldoMayorA, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTipoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSaldoMayorA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEstadoTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnFiltrar)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addGap(51, 51, 51))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,9 +193,112 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtSaldoMayorAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoMayorAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSaldoMayorAActionPerformed
+
+//    public boolean camposLlenadosCorrectamente() {
+//        if (txtEstado.getText().isBlank()) {
+//            JOptionPane.showMessageDialog(null, "Llena los apartado correctamente para continuar", "ERROR", JOptionPane.PLAIN_MESSAGE);
+//            return false;
+//        }
+//        return true;
+//    }
+    //String numeroTarjeta, boolean filtrarTipoTarjeta, String tipoTarjeta, 
+//            boolean filtrarSaldoMayorA, int saldoMayorA, boolean filtrarInteresMayorA, 
+//            int interesMayorA
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        obtenerDatosPorFiltrar();
+        ListadoSolicitudesBE listadoSolicitudesBE = new ListadoSolicitudesBE(sql, filtrarTipoTarjeta, tipoTarjeta,
+                filtrarSaldoMayorA, saldoMayorA, filtrarEstado, estadoTarjeta, filtrarFecha, fechaInicial
+                , fechaFinal, true, gestorArchivosBE, tabla);
+        listadoSolicitudesBE.procesar();
+        
+//        if (camposLlenadosCorrectamente()) {
+//            obtenerDatosPorFiltrar();
+//            EstadoCuentaBE estadoCuentaBE = new EstadoCuentaBE(sql, txtEstado.getText(), filtrarTipoTarjeta, tipoTarjeta, 
+//            filtrarSaldoMayorA, saldoMayorA, filtrarInteresMayorA, interesMayorA, true, gestorArchivosBE, tabla);
+//            estadoCuentaBE.procesar();
+//        }
+        
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    public void obtenerDatosPorFiltrar() {
+        //Filtrar por tipo, salario mayores a, estado y rango fecha
+        System.out.println("VALORES EN FE: " );
+        if (txtTipoTarjeta.getSelectedIndex() == 1) {
+            tipoTarjeta = "NACIONAL";
+            filtrarTipoTarjeta = true;
+        } else if (txtTipoTarjeta.getSelectedIndex() == 2) {
+            tipoTarjeta = "REGIONAL";
+            filtrarTipoTarjeta = true;
+        } else if (txtTipoTarjeta.getSelectedIndex() == 3) {
+            tipoTarjeta = "INTERNACIONAL";
+            filtrarTipoTarjeta = true;
+        }
+        System.out.println("Tipo: " + tipoTarjeta + " filtrar: " + filtrarTipoTarjeta);
+        
+        if (!txtSaldoMayorA.getText().isBlank()) {
+            saldoMayorA = Integer.valueOf(txtSaldoMayorA.getText());
+            filtrarSaldoMayorA = true;
+        }
+        
+        //Tipo
+        if (txtEstadoTarjeta.getSelectedIndex() == 1) {
+            estadoTarjeta = "TRAMITE";
+            filtrarEstado = true;
+        } else if (txtEstadoTarjeta.getSelectedIndex() == 2) {
+            estadoTarjeta = "ACTIVA";
+            filtrarEstado = true;
+        } else if (txtEstadoTarjeta.getSelectedIndex() == 3) {
+            estadoTarjeta = "CANCELADA";
+            filtrarEstado = true;
+        }
+        System.out.println("Estado: " + estadoTarjeta + " filtrar: " + filtrarEstado);
+        
+        //Filtrar fecha
+        if (!txtFechaInicial.getText().isBlank()) {
+            fechaInicial = txtFechaInicial.getText();
+            filtrarFecha = true;
+        }
+        
+        if (!txtFechaFinal.getText().isBlank()) {
+            fechaInicial = txtFechaInicial.getText();
+            filtrarFecha = true;
+        }
+        
+    }
+    
+    private void txtSaldoMayorAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSaldoMayorAKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtSaldoMayorAKeyTyped
+
+    private void txtFechaInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFechaInicialKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaInicialKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFiltrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JComboBox<String> txtEstadoTarjeta;
+    private javax.swing.JTextField txtFechaFinal;
+    private javax.swing.JTextField txtFechaInicial;
+    private javax.swing.JTextField txtSaldoMayorA;
+    private javax.swing.JComboBox<String> txtTipoTarjeta;
     // End of variables declaration//GEN-END:variables
 }

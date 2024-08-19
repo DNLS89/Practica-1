@@ -45,7 +45,7 @@ public class AutorizacionBE extends Tramite {
             cambiarEstado();
             cambiarNumeroTarjeta(tipoTarjeta());
             try {
-                agregarFechaCreacion();
+                agregarFechasCreacionYModificacion();
             } catch (ParseException ex) {
                 Logger.getLogger(AutorizacionBE.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -114,7 +114,7 @@ public class AutorizacionBE extends Tramite {
         return true;
     }
     
-    public void agregarFechaCreacion() throws ParseException {
+    public void agregarFechasCreacionYModificacion() throws ParseException {
         Date thisDate = new Date();
         java.sql.Date sqlDate = new java.sql.Date (thisDate.getTime()); 
         //SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -126,6 +126,10 @@ public class AutorizacionBE extends Tramite {
             String comandoIngresarFechaCreacion = "UPDATE tarjeta set fecha_creacion = " + "\"" + sqlDate + "\"" 
                             + " WHERE numero_solicitud = " + "\"" + numeroSolicitud + "\"" + " ";
             Statement statementInsert = connection.createStatement();
+            statementInsert.executeUpdate(comandoIngresarFechaCreacion);
+            
+            comandoIngresarFechaCreacion = "UPDATE tarjeta set fecha_ultima_modificacion = " + "\"" + sqlDate + "\"" 
+                            + " WHERE numero_solicitud = " + "\"" + numeroSolicitud + "\"" + " ";
             statementInsert.executeUpdate(comandoIngresarFechaCreacion);
             
         } catch (Exception e) {
