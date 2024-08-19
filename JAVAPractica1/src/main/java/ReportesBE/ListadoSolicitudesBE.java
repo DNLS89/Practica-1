@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +34,9 @@ public class ListadoSolicitudesBE extends Reporte {
     private String estadoTarjeta;
     private boolean filtrarFecha;
     private String fechaInicial;
+    private java.sql.Date fechaInicialSQL;
     private String fechaFinal;
+    private java.sql.Date fechaFinalSQL;
 
     private boolean ejecucionGUI = false;
     private String comandoListadoTarjetas = "SELECT numero_tarjeta, fecha_ultima_modificacion, tipo, nombre, "
@@ -83,7 +88,8 @@ public class ListadoSolicitudesBE extends Reporte {
 
     @Override
     public void procesar() {
-
+        formatoFechaInicialAdecuado();
+        formatoFechaFinalAdecuado();
         crearComandoParaFiltrar();
         if (ejecucionGUI) {
             extraerDatosTabla();
@@ -95,6 +101,34 @@ public class ListadoSolicitudesBE extends Reporte {
             e.printStackTrace();
         }
 
+    }
+    
+    public void formatoFechaInicialAdecuado() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        
+        try {
+            fechaInicial = fechaInicial.replace("/", "-");
+            date = dateFormat.parse(fechaInicial);
+            fechaInicialSQL = new java.sql.Date(date.getTime());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
+    public void formatoFechaFinalAdecuado() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        
+        try {
+            fechaFinal = fechaFinal.replace("/", "-");
+            date = dateFormat.parse(fechaFinal);
+            fechaFinalSQL = new java.sql.Date(date.getTime());
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "El formato de la fecha no es el adecuado", "Formato Fecha Incorrecto", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     public void extraerDatosTabla() {
@@ -198,7 +232,7 @@ public class ListadoSolicitudesBE extends Reporte {
             comandoListadoTarjetas += " AND (estado = \"" + estadoTarjeta + "\")";
         }
         if (filtrarFecha) {
-            //Set rango, probar con esto
+            comandoListadoTarjetas += " AND (fecha_ultima_modificacion BETWEEN '" + fechaInicialSQL + "' AND '" + fechaFinalSQL +"')";
         }
         //System.out.println("COmando creado: " + comandoListadoTarjetas);
     }

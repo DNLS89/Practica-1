@@ -226,7 +226,6 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
 
     public void obtenerDatosPorFiltrar() {
         //Filtrar por tipo, salario mayores a, estado y rango fecha
-        System.out.println("VALORES EN FE: " );
         if (txtTipoTarjeta.getSelectedIndex() == 1) {
             tipoTarjeta = "NACIONAL";
             filtrarTipoTarjeta = true;
@@ -237,7 +236,6 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
             tipoTarjeta = "INTERNACIONAL";
             filtrarTipoTarjeta = true;
         }
-        System.out.println("Tipo: " + tipoTarjeta + " filtrar: " + filtrarTipoTarjeta);
         
         if (!txtSaldoMayorA.getText().isBlank()) {
             saldoMayorA = Integer.valueOf(txtSaldoMayorA.getText());
@@ -255,16 +253,15 @@ public class ListadoSolicitudesFE extends javax.swing.JPanel {
             estadoTarjeta = "CANCELADA";
             filtrarEstado = true;
         }
-        System.out.println("Estado: " + estadoTarjeta + " filtrar: " + filtrarEstado);
         
-        //Filtrar fecha
+        //Filtrar fecha, en base a si se puede convertir o no al formato adecuado
         if (!txtFechaInicial.getText().isBlank()) {
             fechaInicial = txtFechaInicial.getText();
             filtrarFecha = true;
         }
         
         if (!txtFechaFinal.getText().isBlank()) {
-            fechaInicial = txtFechaInicial.getText();
+            fechaFinal = txtFechaFinal.getText();
             filtrarFecha = true;
         }
         
