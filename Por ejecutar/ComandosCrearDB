@@ -1,3 +1,5 @@
+tarjeta_control
+
 create schema PRUEBA2;
 use PRUEBA2;
 
